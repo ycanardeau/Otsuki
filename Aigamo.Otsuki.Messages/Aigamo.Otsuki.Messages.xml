@@ -1,0 +1,1487 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Aigamo.Otsuki.Messages</name>
+    </assembly>
+    <members>
+        <member name="T:Aigamo.Otsuki.Messages.Core.AckConnectInfoMessage">
+            <summary>
+            The DN_ACK_CONNECT_INFO packet is sent from the client/peer to the server/host to <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_6aa258ea-917f-461a-9c54-1b1a66791965">acknowledge</see> the receipt of connection information. This packet contains no user data beyond the packet type field.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckConnectInfoMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage">
+            <summary>
+            The DN_ACK_NAMETABLE_OP packet is sent from the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> that is being queried for <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see> information back to the new <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see>. It will include all entries missing from the new host's name table.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage.Entry.MessageId">
+            <summary>
+            A 32-bit field that contains the internal message for the given <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_f3af3b08-b79e-477d-a4ad-76f4168485e4">name table entry</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage.Entry.OperationSize">
+            <summary>
+            A 32-bit field that contains the size for the given operation buffer.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage.Entry.Operation">
+            <summary>
+            A variable length field that contains the portion of the packet originally associated with the name table operation, except for the <b>dwPacketType</b> field, as indicated by the <b>dwMsgId</b> field. Each operation buffer is atomic to itself. For example, an <b>op</b> value corresponding to a <b>dwMsgId</b> field value of 0x000000D1 would contain the <b>dpnidLeaving</b>, <b>dwVersion</b>, <b>dwVersionNotUsed</b>, and <b>dwDestroyReason</b> field information from an original DN_DESTROY_PLAYER packet.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AckNameTableOperationsMessage.NumEntries">
+            <summary>
+            A 32-bit field that contains the number of name table entries included. The <b>dwMsgId</b>, <b>dwOpOffset</b>, <b>dwOpSize</b>, and <b>op</b> fields are present in a DN_ACK_NAMETABLE_OP message <b>dwNumEntries</b> times.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.AddPlayerMessage">
+            <summary>
+            The DN_ADD_PLAYER packet is sent from the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> and instructs <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peers</see> to add a specified peer to the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Dpnid">
+            <summary>
+            A 32-bit field that contains the identifier of the peer to add. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.DpnidOwner">
+            <summary>
+            A 32-bit field that contains the identifier of the game session owner. For more information, see section 2.2.7.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Flags">
+            <summary>
+            A 32-bit field that contains player flags.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Version">
+            <summary>
+            A 32-bit field that specifies the current name table version number.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.DnetClientVersion">
+            <summary>
+            A 32-bit field that contains the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_1a73cb63-9f53-49e9-9f3e-19ce82ab5a6d">DirectPlay</see> version of the client being added to the game session.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.NameSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the name. If <b>dwNameOffset</b> is 0, <b>dwNameSize</b> SHOULD also be 0. If <b>dwNameOffset</b> is not 0, <b>dwNameSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.DataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the peer data. If <b>dwDataOffset</b> is 0, <b>dwDataSize</b> SHOULD also be 0. If <b>dwDataOffset</b> is not 0, <b>dwDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.UrlSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the connecting peer's URL address.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Url">
+            <summary>
+            A variable-length field that contains an array of characters that specify the client URL.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Data">
+            <summary>
+            A variable-length field that specifies a byte array of characters that contain user data.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.AddPlayerMessage.Name">
+            <summary>
+            A variable-length field that specifies an array of <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a">wide characters</see> that contain the peer name including the NULL termination character.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.Address">
+            <summary>
+            The Address object contains generic addressing methods used to create and manipulate addresses for Microsoft® DirectPlay®.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.Address.ServiceProvider">
+            <summary>
+            Retrieves or sets the service provider globally unique identifier (GUID) in the <see cref="T:Aigamo.Otsuki.Messages.Core.Address"/> object.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.Address.NumberComponents">
+            <summary>
+            Retrieves the number of components in the <see cref="T:Aigamo.Otsuki.Messages.Core.Address"/> object.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.Address.Url">
+            <summary>
+            Retrieves or sets the Microsoft DirectPlay address URL string represented by this <see cref="T:Aigamo.Otsuki.Messages.Core.Address"/> object.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.AddComponent(System.String,System.Byte[])">
+            <summary>
+            Adds a component to the address. If the component is part of the address, it is replaced by the new value in this call.Values are specified in native formats when making this call. Therefore, the parameter should be a recast reference to a variable that holds the data in the native format. For example, if the component is a , the parameter should be a recast reference to a . This method validates that the predefined component types are the right format.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.AddComponent(System.String,System.Guid)">
+            <summary>
+            Adds a component to the address. If the component is part of the address, it is replaced by the new value in this call.Values are specified in native formats when making this call. Therefore, the parameter should be a recast reference to a variable that holds the data in the native format. For example, if the component is a , the parameter should be a recast reference to a . This method validates that the predefined component types are the right format.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.AddComponent(System.String,System.Int32)">
+            <summary>
+            Adds a component to the address. If the component is part of the address, it is replaced by the new value in this call.Values are specified in native formats when making this call. Therefore, the parameter should be a recast reference to a variable that holds the data in the native format. For example, if the component is a , the parameter should be a recast reference to a . This method validates that the predefined component types are the right format.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.AddComponent(System.String,System.String)">
+            <summary>
+            Adds a component to the address. If the component is part of the address, it is replaced by the new value in this call.Values are specified in native formats when making this call. Therefore, the parameter should be a recast reference to a variable that holds the data in the native format. For example, if the component is a , the parameter should be a recast reference to a . This method validates that the predefined component types are the right format.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.GetComponentBinary(System.String)">
+            <summary>
+            Retrieves information on the component at the specified key. Values for the component are retrieved in their native format. If the component key is not found, DPNERR_DOESNOTEXIST is returned.The value of the component is retrieved in its native format. Therefore, if the component's value is a , a is retrieved by this call. So buffer size = 4 and should be a recast .
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.GetComponentGuid(System.String)">
+            <summary>
+            Retrieves information on the component at the specified key. Values for the component are retrieved in their native format. If the component key is not found, DPNERR_DOESNOTEXIST is returned.The value of the component is retrieved in its native format. Therefore, if the component's value is a , a is retrieved by this call. So buffer size = 4 and should be a recast .
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.GetComponentInteger(System.String)">
+            <summary>
+            Retrieves information on the component at the specified key. Values for the component are retrieved in their native format. If the component key is not found, DPNERR_DOESNOTEXIST is returned.The value of the component is retrieved in its native format. Therefore, if the component's value is a , a is retrieved by this call. So buffer size = 4 and should be a recast .
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.Core.Address.GetComponentString(System.String)">
+            <summary>
+            Retrieves information on the component at the specified key. Values for the component are retrieved in their native format. If the component key is not found, DPNERR_DOESNOTEXIST is returned.The value of the component is retrieved in its native format. Therefore, if the component's value is a , a is retrieved by this call. So buffer size = 4 and should be a recast .
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.ConnectAttemptFailedMessage">
+            <summary>
+            The DN_CONNECT_ATTEMPT_FAILED packet is sent from the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> to a connecting <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> to indicate that an existing peer in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see> was unable to carry out the host's instruction to connect to a new peer.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectAttemptFailedMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectAttemptFailedMessage.Dpnid">
+            <summary>
+            A 32-bit field that contains the identifier for the existing peer in the game session that was unable to connect to the new peer. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.ConnectFailedMessage">
+            <summary>
+            The DN_CONNECT_FAILED packet indicates that a connection attempt failed.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectFailedMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectFailedMessage.ResultCode">
+            <summary>
+            A 32-bit field that contains the failure code.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectFailedMessage.ReplySize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the data in the <b>reply</b> field. If <b>dwReplyOffset</b> is 0, <b>dwReplySize</b> SHOULD also be 0. If <b>dwReplyOffset</b> is not 0, <b>dwReplySize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ConnectFailedMessage.Reply">
+            <summary>
+            A variable-length field that contains an array of bytes that provides a reply message from the application identifying the connection failure. Reply data is only expected when the failure type is <b>DPNERR_HOSTREJECTEDCONNECTION</b>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.DestroyPlayerFlags">
+            <summary>
+            Flag that controls how this method is processed.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage">
+            <summary>
+            The DN_DESTROY_PLAYER packet instructs the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> to remove a specified user from its <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage.DpnidLeaving">
+            <summary>
+            A 32-bit field that contains the identifier of the client or server to remove from the name table. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage.Version">
+            <summary>
+            A 32-bit field that contains the current name table version number.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.DestroyPlayerMessage.Reason">
+            <summary>
+            A 32-bit field that contains the reason for terminating the specified client or server.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.DirectX80">
+            <summary>
+            DirectX 8.0
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.DirectX81">
+            <summary>
+            DirectX 8.1
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.PocketPC">
+            <summary>
+            PocketPC
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.WindowsServer2003">
+            <summary>
+            Windows Server 2003 operating system
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.DirectX82">
+            <summary>
+            DirectX 8.2
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.DnetVersion.DirectX90">
+            <summary>
+            DirectX 9.0
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.HostMigrateCompleteMessage">
+            <summary>
+            The DN_HOST_MIGRATE_COMPLETE packet informs <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peers</see> that the session-hosting responsibilities have successfully migrated from the departing old <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.HostMigrateCompleteMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.HostMigrateMessage">
+            <summary>
+            The DN_HOST_MIGRATE packet is sent from the new <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> to all remaining <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peers</see> in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see> to notify them that a migration is taking place.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.HostMigrateMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.HostMigrateMessage.DpnidOldHost">
+            <summary>
+            A 32-bit field that contains the identifier for the host that has just disconnected. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.HostMigrateMessage.DpnidNewHost">
+            <summary>
+            A 32-bit field that contains the identifier for the newly assigned host that is in the process of migrating. For more information, see section 2.2.7.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.InstructConnectMessage">
+            <summary>
+            The DN_INSTRUCT_CONNECT packet instructs a peer to connect to a designated peer. This packet uses the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dpl8r/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219">CONNECT</see> and <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dpl8r/2377d224-85b7-4c1a-8677-bd18a08dc5da">CONNECTED</see> packets defined in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dpl8r/7a35d96c-daca-4311-bc2b-bd6a2f50bf14">[MC-DPL8R]</see> sections 2.2.1.1 and 2.2.1.2. For an example of the message sequence for these packets, see [MC-DPL8R] section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dpl8r/f02dc0e7-3ab0-4f40-80da-bf8dc09f9f7f">4.1</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructConnectMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructConnectMessage.Dpnid">
+            <summary>
+            A 32-bit field that contains the identifier of the designated client to which the connection is being made. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructConnectMessage.Version">
+            <summary>
+            A 32-bit field that contains the current version of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructConnectMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.InstructedConnectFailedMessage">
+            <summary>
+            The DN_INSTRUCTED_CONNECT_FAILED packet is sent from a peer to indicate that it was unable to carry out a host instruction to connect to a new peer.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructedConnectFailedMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.InstructedConnectFailedMessage.Dpnid">
+            <summary>
+            A 32-bit field that contains the identifier for the peer to which the attempted connection failed. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.IntegrityCheckMessage">
+            <summary>
+            The DN_INTEGRITY_CHECK packet is a request from a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> to a peer inquiring whether the peer is still in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.IntegrityCheckMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.IntegrityCheckMessage.DpnidRequesting">
+            <summary>
+            A 32-bit field that contains the identifier of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> requesting this validation. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.IntegrityCheckResponseMessage">
+            <summary>
+            The DN_INTEGRITY_CHECK_RESPONSE packet is a response from a peer to the host confirming that it is still in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.IntegrityCheckResponseMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.IntegrityCheckResponseMessage.DpnidRequesting">
+            <summary>
+            Identifier of the peer that requested the validation. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Local">
+            <summary>
+            The name table entry is the local player.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Host">
+            <summary>
+            The name table entry is the host.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.AllPlayersGroup">
+            <summary>
+            The name table entry is the All Players Group.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Group">
+            <summary>
+            The name table entry is a group.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.GroupAutoDestruct">
+            <summary>
+            The name table entry supports group autodestruct.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Peer">
+            <summary>
+            The name table entry is a peer. In peer-to-peer mode, the name table entry representing the host of the game session is also marked as a peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Client">
+            <summary>
+            The name table entry is a client.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Server">
+            <summary>
+            The name table entry is a server.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Connecting">
+            <summary>
+            The name table entry is connecting.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Available">
+            <summary>
+            The name table entry is to make the member available for use.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Disconnecting">
+            <summary>
+            The name table entry to indicate disconnecting.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Indicated">
+            <summary>
+            The name table entry to indicate connection to the application.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.Created">
+            <summary>
+            The name table entry to indicate the application was given a created player.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.NeedToDestroy">
+            <summary>
+            The name table entry to indicate the need to destroy the player.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.NameTableEntryFlags.InUse">
+            <summary>
+            The name table entry to indicate that the player is in use.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo">
+            <summary>
+            The DN_NAMETABLE_ENTRY_INFO contains a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_0258d4e2-d4f7-4099-ae0f-a02fad73e824">player</see> or <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_51c51c14-7f9d-4c0b-a69c-d3e059bfffac">group</see> that exists in a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cbddab17-6b4a-45ad-b121-a5d8695501c5">DirectPlay 8</see> <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>. This includes all the information that the DirectPlay 8 Protocol: Core and Service Providers would need about a certain entry.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Dpnid">
+            <summary>
+            A 32-bit integer that specifies the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_1a73cb63-9f53-49e9-9f3e-19ce82ab5a6d">DirectPlay</see> identifier (<see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_92d4e8fa-d8ba-4d9e-bddf-5d9ce7567002">DPNID</see>) of the player or group that has been defined by the host/server. For more information about DPNIDs, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.DpnidOwner">
+            <summary>
+            A 32-bit integer that provides the DirectPlay identifier (DPNID) for the owner of the player or group. When the DN_NAMETABLE_ENTRY_INFO message represents a group, that is, <b>NAMETABLE_ENTRY_FLAG_GROUP</b> is set in the <b>dwFlags</b> field, the <b>dpnidOwner</b> field MUST be nonzero. When DN_NAMETABLE_ENTRY_INFO represents a player, <b>dpnidOwner</b> SHOULD be set to zero when sending and MUST be ignored on receipt. For more information about DPNIDs, see section 2.2.7.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Flags">
+            <summary>
+            A 32-bit integer that specifies the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_f3af3b08-b79e-477d-a4ad-76f4168485e4">name table entry</see> flags. Entries are OR'd together.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Version">
+            <summary>
+            A 32-bit integer that specifies the version number of the name table.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.DnetVersion">
+            <summary>
+            A 32-bit integer that provides the DirectPlay version.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.NameSize">
+            <summary>
+            The size, in bytes, of the <b>name</b> field. (Specified in section 2.2.1.4). If <b>dwNameOffset</b> is 0, <b>dwNameSize</b> SHOULD also be 0. If <b>dwNameOffset</b> is not 0, <b>dwNameSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.DataSize">
+            <summary>
+            The size, in bytes, of the <b>data</b> field. If <b>dwDataOffset</b> is 0, <b>dwDataSize</b> SHOULD also be 0. If <b>dwDataOffset</b> is not 0, <b>dwDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.UrlSize">
+            <summary>
+            The size, in bytes, of the <b>url</b> field.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Url">
+            <summary>
+            A variable-length field that contains a 0-terminated character array that provides the URL of a user in the game session. This field's position is determined by <b>dwURLOffset</b> and the size stated in <b>dwURLSize</b>, both fields in the corresponding DN_NAMETABLE_ENTRY_INFO structure. There can be multiple instances of the URL field, as defined by the number of DN_NAMETABLE_ENTRY_INFO sections that are included.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Data">
+            <summary>
+            A variable-length field that contains a 0-terminated character array that specifies the user data. This field's position is determined by <b>dwDataOffset</b> and the size stated in <b>dwDataSize</b>, both fields in the corresponding DN_NAMETABLE_ENTRY_INFO structure. There can be multiple instances of the Data field, as defined by the number of DN_NAMETABLE_ENTRY_INFO sections that are included.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableEntryInfo.Name">
+            <summary>
+            A variable-length field that contains a 0-terminated <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a">wide character</see> array that contains the client name. This field's position is determined by <b>dwNameOffset</b> and the size stated in <b>dwNameSize</b>, both fields in the corresponding DN_NAMETABLE_ENTRY_INFO structure. There can be multiple instances of the Name field, as defined by the number of DN_NAMETABLE_ENTRY_INFO sections that are included.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.NameTableMembershipInfo">
+            <summary>
+            The DN_NAMETABLE_MEMBERSHIP_INFO structure contains information about a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table's</see> <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_51c51c14-7f9d-4c0b-a69c-d3e059bfffac">group</see> and <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_0258d4e2-d4f7-4099-ae0f-a02fad73e824">player</see> memberships. The number of DN_NAMETABLE_MEMBERSHIP_INFO structures in this packet is specified in the <b>dwMembershipCount</b> field.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableMembershipInfo.DpnidPlayer">
+            <summary>
+            A 32-bit integer that specifies the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_1a73cb63-9f53-49e9-9f3e-19ce82ab5a6d">DirectPlay</see> identifier for the user. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableMembershipInfo.DpnidGroup">
+            <summary>
+            A 32-bit integer that provides the DirectPlay identifier for the group. For more information, see section 2.2.7.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableMembershipInfo.Version">
+            <summary>
+            A 32-bit integer that specifies the name table version.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableMembershipInfo.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.NameTableVersionMessage">
+            <summary>
+            The DN_NAMETABLE_VERSION packet specifies the version number of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableVersionMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableVersionMessage.Version">
+            <summary>
+            A 32-bit field that contains the current name table version number.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.NameTableVersionMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ObjectType.Client">
+            <summary>
+            Connecting application is a client.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ObjectType.Peer">
+            <summary>
+            Connecting application is a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see>.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.PlayerConnectInfo">
+            <summary>
+            Sends client/peer connection information to the server/host.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.ConnectFailed">
+            <summary>
+            Connection attempt failed.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.SendConnectInfo">
+            <summary>
+            The server/host response to a client/peer that contains game session information.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.AddPlayer">
+            <summary>
+            Instructs peers to add the specified peer to the game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.AckConnectInfo">
+            <summary>
+            Acknowledges (ACK) the receipt of <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see> information.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.InstructConnect">
+            <summary>
+            Instructs a peer to connect to a designated peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.SendPlayerDpnid">
+            <summary>
+            Sends user identification to another client/peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.InstructedConnectFailed">
+            <summary>
+            Indicates that a peer was unable to carry out a host's instruction to connect to a new peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.ConnectAttemptFailed">
+            <summary>
+            Indicates from the host that an existing peer was unable to carry out the host's instruction to connect to a new peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.TerminateSession">
+            <summary>
+            Instructs the client or the peer to close and disconnect itself from the game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.DestroyPlayer">
+            <summary>
+            Instructs the peer to remove the specified peer from the name table.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.HostMigrate">
+            <summary>
+            Notified peers in the game session that the host is currently migrating.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.NameTableVersion">
+            <summary>
+            Specifies the version number of the name table.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.ResyncVersion">
+            <summary>
+            Requests that the name table version number be resynchronized to the current version number.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.RequestIntegrityCheck">
+            <summary>
+            Requests that the host determine whether a target peer is still in the game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.IntegrityCheck">
+            <summary>
+            Host is requesting a peer to validate that it is still in the game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.IntegrityCheckResponse">
+            <summary>
+            Host is requesting a peer to validate that it is still in the game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.RequestNameTableOperations">
+            <summary>
+            Sent from the host after a migration requesting the name table from a peer with a newer name table, if any exists.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.AckNameTableOperations">
+            <summary>
+            Sent from the peer to the new host, acknowledging the new name table information.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.PacketType.HostMigrateComplete">
+            <summary>
+            Informs peers that the session-hosting responsibilities have successfully migrated from the departing old host.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage">
+            <summary>
+            This is the first message passed into a host/server to initiate the connect sequence.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.Flags">
+            <summary>
+            A 32-bit field that specifies the connect flags.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.DnetVersion">
+            <summary>
+            A 32-bit field that specifies the DirectPlay version.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.NameSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the data in the <b>name</b> field. If <b>dwNameOffset</b> is set to 0, <b>dwNameSize</b> SHOULD also be 0. If <b>dwNameOffset</b> is not 0, <b>dwNameSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.DataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>data</b> field. If <b>dwDataOffset</b> is set to 0, <b>dwDataSize</b> SHOULD also be 0. If <b>dwDataOffset</b> is not 0, <b>dwDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.PasswordSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the password. If <b>dwPasswordOffset</b> is set to 0, <b>dwPasswordSize</b> SHOULD also be 0. If <b>dwPasswordOffset</b> is not 0, <b>dwPasswordSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.ConnectDataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>connectData</b> field. If <b>dwConnectDataOffset</b> is 0, <b>dwConnectDataSize</b> SHOULD also be 0. If <b>dwConnectDataOffset</b> is not 0, <b>dwConnectDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.UrlSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>url</b> field. If <b>dwURLOffset</b> is 0, <b>dwURLSize</b> SHOULD also be 0. If <b>dwURLOffset</b> is not 0, <b>dwURLSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.GuidInstance">
+            <summary>
+            A 128-bit field that contains the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_f49694cc-c350-462d-ab8e-816f0103c6c1">GUID</see> that identifies the particular instance of the server/host application to which the client/peer is attempting to connect. Each instance of a DirectPlay server/host application generates a new unique GUID each time the application hosts a new game session. In order for the client/peer to connect, the value of <b>guidInstance</b> MUST match the value of the GUID instance defined on the server/host or the value MUST be all zeroes. If a different, nonzero GUID instance value is specified, the recipient MUST send a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/7fc9f0e0-27d4-4975-b520-079737d5cb0b">DN_CONNECT_FAILED</see> message with the result code DPNERR_INVALIDINSTANCE (0x80158380) and terminate the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dpl8r/7a35d96c-daca-4311-bc2b-bd6a2f50bf14">[MC-DPL8R]</see> connection. For information on how a client/peer retrieves the value of the GUID instance defined on the server/host, see the description of the <b>ApplicationInstanceGUID</b> field in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dplhp/ef5b29b4-cc5b-4aea-82a4-c0f55296f1a2">EnumResponse</see> message defined in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/../mc-dplhp/1a901a85-f85c-497c-aac7-1e172a894243">[MC-DPLHP]</see> section 2.2.2.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.GuidApplication">
+            <summary>
+            A 128-bit field that specifies the application's assigned GUID. This is the unique identifier for the specific application, not per instance.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.AlternateAddressDataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>alternateAddressData</b> field. If <b>dwAlternateAddressDataOffset</b> is set to 0, <b>dwAlternateAddressDataSize</b> SHOULD also be 0. If <b>dwAlternateAddressDataOffset</b> is not 0, <b>dwAlternateAddressDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.AlternateAddresses">
+            <summary>
+            A variable-length field that specifies alternative address data used to connect the client. This field's position is determined by <b>dwAlternateAddressDataOffset</b> and the size stated in <b>dwAlternateAddressDataSize</b>. The addresses that are passed into the <b>alternateAddressData</b> field are formatted via the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/bb72c589-3c28-4e77-ba36-995e1a825e6b">DN_ALTERNATE_ADDRESS</see> structure. Because DN_ALTERNATE_ADDRESS contains its own size, multiple alternate addresses can be passed in by appending the DN_ALTERNATE_ADDRESS structures together. However, the maximum number of alternate addresses that can be passed in at a single time is limited to 12.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.Url">
+            <summary>
+            A variable-length field that contains a 0-terminated byte character array that specifies the client URL. This field's position is determined by <b>dwURLOffset</b> and the size stated in <b>dwURLSize</b>. It is defined in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/180a7d08-8b45-4b32-a971-4dfc6a19f9ac">DN_ADDRESSING_URL</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.ConnectData">
+            <summary>
+            A variable-length field that contains a byte array that provides the connection data. This field's position is determined by <b>dwConnectDataOffset</b> and the size stated in <b>dwConnectDataSize</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.Password">
+            <summary>
+            A variable-length field that contains a 0-terminated <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_30c30de3-1d00-4d0d-9109-fcc0094fc95a">wide character</see> array that specifies the application password data. This field's position is determined by <b>dwPasswordOffset</b> and the size stated in <b>dwPasswordSize</b>. This data is passed in clear text to the protocol layer.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.Data">
+            <summary>
+            A variable-length field that contains a byte array that specifies the application data. This field's position is determined by <b>dwDataOffset</b> and the size stated in <b>dwDataSize</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.PlayerConnectInfoMessage.Name">
+            <summary>
+            A variable-length field that contains a 0-terminated wide character array that specifies the client/peer name. This field's position is determined by <b>dwNameOffset</b> and the size stated in <b>dwNameSize</b>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.RequestIntegrityCheckMessage">
+            <summary>
+            The DN_REQ_INTEGRITY_CHECK packet requests that a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> determine whether a target client is still in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestIntegrityCheckMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestIntegrityCheckMessage.RequestContext">
+            <summary>
+            A 32-bit field that contains the context for the request operation. Values for the <b>dwReqContext</b> field SHOULD be ignored by the recipient.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestIntegrityCheckMessage.DpnidTarget">
+            <summary>
+            A 32-bit field that contains the identifier of the selected target peer for the host to validate. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.RequestNameTableOperationsMessage">
+            <summary>
+            The DN_REQ_NAMETABLE_OP packet is sent from the new <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> to a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> with a newer <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see> to request that the peer send back name table operations that have not yet been performed on the host. If no newer name table exists, this message is not sent.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestNameTableOperationsMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestNameTableOperationsMessage.Version">
+            <summary>
+            A 32-bit field that contains the current name table version number of the host.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.RequestNameTableOperationsMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.ResultCode">
+            <summary>
+            Result codes that can be returned via events.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.Generic">
+            <summary>
+            An undetermined error occurred inside a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_94fdbc37-5f95-4e9a-a289-964c7da35edc">DirectX</see> subsystem. This includes uncommon errors that cannot be generalized.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.AlreadyClosing">
+            <summary>
+            Server/host is closing or host is migrating.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.HostRejectedConnection">
+            <summary>
+            Application declined connection attempt.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.InvalidApplication">
+            <summary>
+            Application GUID is not valid for this application.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.InvalidInstance">
+            <summary>
+            Instance <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_f49694cc-c350-462d-ab8e-816f0103c6c1">GUID</see> is not valid for this <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.InvalidInterface">
+            <summary>
+            Nonclient attempting to connect to a server. Nonpeer attempting to connect to a host/peer.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.InvalidPassword">
+            <summary>
+            Password passed in does not match what is expected.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.InvalidVersion">
+            <summary>
+            Version passed in is not a valid <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_1a73cb63-9f53-49e9-9f3e-19ce82ab5a6d">DirectPlay</see> version.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.ResultCode.NotHost">
+            <summary>
+            Attempting to connect to an application that is not the host/server.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.ResyncVersionMessage">
+            <summary>
+            The DN_RESYNC_VERSION packet is used to request that the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see> version number be resynchronized to the current version number.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ResyncVersionMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ResyncVersionMessage.Version">
+            <summary>
+            A 32-bit field that contains the current name table version number.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.ResyncVersionMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage">
+            <summary>
+            The DN_SEND_CONNECT_INFO packet is sent from the host/server indicating to the connecting peer/client that it has joined the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.PacketType">
+            <summary>
+            A 32-bit integer that indicates the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.ReplySize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>reply</b> field. If <b>dwReplyOffset</b> is set to 0, <b>dwReplySize</b> MUST be 0. If <b>dwReplyOffset</b> is not 0, <b>dwReplySize</b> MUST NOT be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Size">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the application description information. This includes all fields starting with <b>dwSize</b> through <b>guidApplication</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Flags">
+            <summary>
+            A 32-bit integer that specifies the application flags.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.MaxPlayers">
+            <summary>
+            A 32-bit integer that specifies the maximum number of clients/peers allowed in the game session. A value of 0 indicates that the maximum number of <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_0258d4e2-d4f7-4099-ae0f-a02fad73e824">players</see> is not specified.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.CurrentPlayers">
+            <summary>
+            A 32-bit integer that specifies the current number of clients/peers in the game session.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.SessionNameSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>sessionName</b> field. If <b>dwSessionNameOffset</b> is 0, <b>dwSessionNameSize</b> MUST be 0. If <b>dwSessionNameOffset</b> is not 0, <b>dwSessionNameSize</b> MUST NOT be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.PasswordSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the password. If <b>dwPasswordOffset</b> is 0, <b>dwPasswordSize</b> MUST be 0. If <b>dwPasswordOffset</b> is not 0, <b>dwPasswordSize</b> MUST NOT be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.ReservedDataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>reservedData</b> field. If <b>dwReservedDataOffset</b> is 0, <b>dwReservedDataSize</b> MUST be 0. If <b>dwReservedDataOffset</b> is not 0, <b>dwReservedDataSize</b> MUST NOT be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.ApplicationReservedDataSize">
+            <summary>
+            A 32-bit field that specifies the size, in bytes, of the <b>applicationReservedData</b> field. If <b>dwApplicationReservedDataOffset</b> is 0, <b>dwApplicationReservedDataSize</b> MUST also be 0. If <b>dwApplicationReservedDataOffset</b> is not 0, <b>dwApplicationReservedDataSize</b> MUST NOT be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.GuidInstance">
+            <summary>
+            A 128-bit field that contains the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_f49694cc-c350-462d-ab8e-816f0103c6c1">GUID</see> that identifies the particular instance of the server/host application. The value of this field implicitly SHOULD match the value of the <b>guidInstance</b> field specified in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/d2f5c735-5947-4b76-98c0-d447d9d36de8">DN_INTERNAL_MESSAGE_PLAYER_CONNECT_INFO</see> or <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/aa00e9b1-8169-4aef-aa4c-1b0619d45c24">DN_INTERNAL_MESSAGE_PLAYER_CONNECT_INFO_EX</see> message, unless that field contained all zeroes, in which case this <b>guidInstance</b> value informs the receiving client of the actual game session instance GUID.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.GuidApplication">
+            <summary>
+            The application GUID as defined by the host/server.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Dpnid">
+            <summary>
+            A 32-bit integer created by the server/host that provides the identifier for the new client joining the game session. For more information, see <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">DN_DPNID</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Version">
+            <summary>
+            A 32-bit integer that specifies the current <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see> version.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.VersionNotUsed">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.EntryCount">
+            <summary>
+            A 32-bit integer that provides the number of entries in the name table contained in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/87370443-4103-4153-a8ac-a6728c39b7e5">DN_NAMETABLE_ENTRY_INFO</see> field below. These are in essence players in the game session.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.MembershipCount">
+            <summary>
+            A 32-bit integer that provides the number of memberships in the name table contained in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/772ec104-55b6-4375-9111-cebd7bca1690">DN_NAMETABLE_MEMBERSHIP_INFO</see> field below. These are in essence player to <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_51c51c14-7f9d-4c0b-a69c-d3e059bfffac">group</see> combinations.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.NameTableEntries">
+            <summary>
+            This field contains a variable-length array of DN_NAMETABLE_ENTRY_INFO structures. The length of this array is described above in the <b>dwEntryCount</b> field. Each entry in this array describes a player or group in the game session. In peer-to-peer mode, the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_96048ee4-02d7-484e-a53b-3b8ed355251d">host</see> MUST transmit entries for all existing participants and the new participant. In <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_a907c749-671d-466b-b589-8c6dea31403f">client/server mode</see>, the server MUST transmit only two entries: one for the server player and one for the new participant.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.NameTableMemberships">
+            <summary>
+            This field contains a variable-length array of DN_NAMETABLE_MEMBERSHIP_INFO structures. The length of this array is described above in the <b>dwMembershipCount</b> field. Each entry in this array describes a player/group combination.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.ApplicationReservedData">
+            <summary>
+            A variable-length field that contains a 0-terminated character array that specifies the application reserved data. This field's position is determined by <b>dwApplicationReservedDataOffset</b> and the size stated in <b>dwApplicationReservedDataSize</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.ReservedData">
+            <summary>
+            A variable-length field that contains a byte array that provides the reserved data. This field's position is determined by <b>dwReservedDataOffset</b> and the size stated in <b>dwReservedDataSize</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Password">
+            <summary>
+            A variable-length field that contains a 0-terminated wide character array that specifies the application password data. This field's position is determined by <b>dwPasswordOffset</b> and the size stated in <b>dwPasswordSize</b>. This data is passed in clear text to the protocol layer.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.SessionName">
+            <summary>
+            A variable-length field that contains a 0-terminated wide character array that specifies the game session name. This field's position is determined by <b>dwSessionNameOffset</b> and the size stated in <b>dwSessionNameSize</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendConnectInfoMessage.Reply">
+            <summary>
+            A variable-length field that contains a byte array that provides the reply. This field's position is determined by <b>dwReplyOffset</b> and the size stated in <b>dwReplySize</b>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.SendPlayerDpnidMessage">
+            <summary>
+            The DN_SEND_PLAYER_DPNID packet is used to send a user identification number to another client.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendPlayerDpnidMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.SendPlayerDpnidMessage.Dpnid">
+            <summary>
+            A 32-bit field that contains the identifier of the client/peer. For more information, see section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/65b0f61c-4f93-42c9-953f-2299e686b497">2.2.7</see>.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.SessionFlags">
+            <summary>
+            Flag that controls how this method is processed.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.ClientServer">
+            <summary>
+            A client/server game session.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.MigrateHost">
+            <summary>
+            <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_72e4727d-d1b3-4503-b803-78da6f5e9fea">Host migration</see> is allowed.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.NoDpnServer">
+            <summary>
+            The <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_1a73cb63-9f53-49e9-9f3e-19ce82ab5a6d">DirectPlay</see> enumeration server is not running.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.RequirePassword">
+            <summary>
+            Password is REQUIRED.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.NoEnumerations">
+            <summary>
+            No enumerations are allowed from the game session. This value is only available in DirectPlay 9.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.FastSigned">
+            <summary>
+            Fast signing is turned on for the game session. Passed to protocol layer. Cannot be used with <b>DPNSESSION_FULL_SIGNED</b>. This value is available only in DirectPlay 9.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Core.SessionFlags.FullSigned">
+            <summary>
+            Full signing turned on for the game session. Passed to protocol layer. Cannot be used with <b>DPNSESSION_FAST_SIGNED</b>. This value is available only in DirectPlay 9.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Core.TerminateSessionMessage">
+            <summary>
+            The DN_TERMINATE_SESSION packet instructs the client or the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_e5d0d91c-9a39-493f-ab1b-f36ce840e6a2">peer</see> to disconnect from the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_cb5007f6-e2af-44f6-abe1-c8a5ff856254">game session</see>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.TerminateSessionMessage.PacketType">
+            <summary>
+            A 32-bit field that contains the packet type.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.TerminateSessionMessage.TerminateDataSize">
+            <summary>
+            A 32-bit field that contains the size, in bytes, of the terminate data. If <b>dwTerminateDataOffset</b> is 0, <b>dwTerminateDataSize</b> SHOULD also be 0. If <b>dwTerminateDataOffset</b> is not 0, <b>dwTerminateDataSize</b> SHOULD also not be 0.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Core.TerminateSessionMessage.TerminateData">
+            <summary>
+            A variable-length field that contains a byte array from the application that describes why the client or the peer is being terminated from the game session.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.GuardedByAttribute">
+            <summary>
+            Indicates the synchronization object that guards this item.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.GuardedByAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new <see cref="T:Aigamo.Otsuki.Messages.GuardedByAttribute"/> object
+            and sets the <see cref="P:Aigamo.Otsuki.Messages.GuardedByAttribute.SyncObjectNames"/> property.
+            </summary>
+            <param name="syncObjectNames">The name of the sync object.</param>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.GuardedByAttribute.SyncObjectNames">
+            <summary>
+            Gets or sets the name of the synchronization object that guards this item.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.GuardsAttribute">
+            <summary>
+            Indicates the items that this synchronization object guards.
+            </summary>
+        </member>
+        <member name="M:Aigamo.Otsuki.Messages.GuardsAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new <see cref="T:Aigamo.Otsuki.Messages.GuardsAttribute"/> object
+            and sets the <see cref="P:Aigamo.Otsuki.Messages.GuardsAttribute.Items"/> property.
+            </summary>
+            <param name="syncObjectName">The name of the sync object.</param>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.GuardsAttribute.Items">
+            <summary>
+            Gets or sets a comma-separated list of items guarded by this synchronization object.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage">
+            <summary>
+            The CONNECTED packet is used to accept a connection request or complete a connection handshake when signing is not enabled.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.Command">
+            <summary>
+            A command-code bitmask that contains values that are combined by using the bitwise OR operation from the following table. The <b>PACKET_COMMAND_CFRAME</b> flag MUST be set. The <b>PACKET_COMMAND_POLL</b> flag MUST be set by a listener accepting a connection request and MUST NOT be set by a connector completing the connection handshake. All other bits MUST be set to zero and the packet MUST be ignored if they are not.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.Opcode">
+            <summary>
+            An extended operation code. It MUST be set to the following value:
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.MessageId">
+            <summary>
+            A message identifier. The initial value SHOULD be set to zero and SHOULD be incremented if the packet is retried.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.ResponseId">
+            <summary>
+            A response identifier. This value MUST be set to the value of the <b>bMsgID</b> field in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219">CONNECT</see> or CONNECTED message to which this is a response.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.ProtocolVersion">
+            <summary>
+            The version number of the sender's DirectPlay 8 Protocol, in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_079478cb-f4c5-4ce5-b72b-2144da5d2ce7">little-endian</see> byte order, where the upper 16 bits are considered a major version number and the lower 16 bits are considered a minor version number. The major version number MUST be set to 0x0001; otherwise, the packet MUST be ignored. The minor version number SHOULD<a id="Appendix_A_Target_2"></a><a aria-label="Product behavior note 2" href="8a440fe2-28b1-44de-8a7e-abe94ce23cf9#Appendix_A_2" data-linktype="relative-path">&lt;2&gt;</a> be set to 0x0006 to indicate support for all features, including <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2e830c5b-5096-4360-a2e6-f88ec8962dce">coalescence</see> and signing.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.SessionId">
+            <summary>
+            The session identifier. This value MUST be set to the value of <b>dwSessID</b> specified in the CONNECT or CONNECTED message to which this is a response.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectedMessage.Timestamp">
+            <summary>
+            The sender's computer system <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2efd2022-ffd1-4be4-9ff3-aa6b1515948f">tick count</see>, in millisecond units, specified in little-endian byte order.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Reliable.ConnectMessage">
+            <summary>
+            The CONNECT packet is used to request a connection. If accepted, the response is a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/2377d224-85b7-4c1a-8677-bd18a08dc5da">CONNECTED (section 2.2.1.2)</see> packet or a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/ac197b6f-789f-4905-bae5-362ca920e177">CONNECTED_SIGNED (section 2.2.1.3)</see> packet, depending on whether packet signing is enabled.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.Command">
+            <summary>
+            A command-code bitmask that contains values that are combined by using the bitwise OR operation from the following table. The <b>PACKET_COMMAND_CFRAME</b> flag MUST be set, and the <b>PACKET_COMMAND_POLL</b> flag SHOULD be set. All other bits MUST be set to zero, and the packet MUST be ignored if they are not.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.Opcode">
+            <summary>
+            Extended operation code. It MUST be set to the following value:
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.MessageId">
+            <summary>
+            A message identifier used to correlate responses. The initial value SHOULD be set to zero and SHOULD be incremented each time the connect packet is retried. The recipient MUST echo the value in <b>bRspId</b> when responding.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.ResponseId">
+            <summary>
+            Not used in connect packets. This MUST be set to zero when sent and ignored on receipt.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.ProtocolVersion">
+            <summary>
+            The version number of the sender's DirectPlay 8 Protocol, in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_079478cb-f4c5-4ce5-b72b-2144da5d2ce7">little-endian</see> byte order, where the upper 16 bits are considered a major version number and the lower 16 bits are considered a minor version number. The major version number MUST be set to 0x0001; otherwise, the packet MUST be ignored. The minor version number SHOULD<a id="Appendix_A_Target_1"></a><a aria-label="Product behavior note 1" href="8a440fe2-28b1-44de-8a7e-abe94ce23cf9#Appendix_A_1" data-linktype="relative-path">&lt;1&gt;</a> be set to 0x0006 to indicate support for all features, including <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2e830c5b-5096-4360-a2e6-f88ec8962dce">coalescence</see> and signing.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.SessionId">
+            <summary>
+            The session identifier used to correlate responses. The value is dependent upon the implementation and SHOULD be a random, nonpredictable number. This MUST NOT be set to zero unless <b>dwCurrentProtocolVersion</b> indicates a minor version less than 0x0005. This MUST remain the same value when retrying the CONNECT packet. The recipient MUST echo the value in <b>dwSessID</b> when responding.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.ConnectMessage.Timestamp">
+            <summary>
+            The requestor's computer system <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2efd2022-ffd1-4be4-9ff3-aa6b1515948f">tick count</see>, in millisecond units and specified in little-endian byte order.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage">
+            <summary>
+            Data frames exist in the standard connection sequence space and typically carry application <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_ba5b8e95-9bae-4562-af24-dca6e860bc38">payload</see> data. They all are identified by having the <b>PACKET_COMMAND_DATA</b> flag (0x01) set in their <b>bCommand</b> field. The total size of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2d23f9e2-e672-4706-a346-5ca133d47473">data frame (DFRAME)</see> header and the application <b>payload</b> data SHOULD be less than the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_03aae42f-32fd-47ab-b413-d5ec92d29d45">maximum transmission unit (MTU)</see> of the underlying protocols and network. If larger messages are to be transmitted, the implementation MUST break the application <b>payload</b> data into multiple DFRAME packets, send the portions sequentially, and set the <b>PACKET_COMMAND_NEW_MSG</b> flag on the first DFRAME and the <b>PACKET_COMMAND_END_MSG</b> flag on the final DFRAME. Otherwise, the single DFRAME MUST have both the <b>PACKET_COMMAND_NEW_MSG</b> and <b>PACKET_COMMAND_END_MSG</b> flags. Application payload data that is split into multiple DFRAMEs MUST NOT be <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2e830c5b-5096-4360-a2e6-f88ec8962dce">coalesced</see> with other payloads.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.Command">
+            <summary>
+            Command field. The <b>PACKET_COMMAND_DATA</b> flag MUST be set. If the packet is a <b>KeepAlive</b>, the <b>PACKET_COMMAND_RELIABLE</b>, <b>PACKET_COMMAND_SEQUENTIAL</b>, and <b>PACKET_COMMAND_END_MSG</b> flags MUST be set. If the packet contains coalesced payloads, the <b>PACKET_COMMAND_NEW_MSG</b> and <b>PACKET_COMMAND_END_MSG</b> flags MUST be set. All other flags are optional.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.Control">
+            <summary>
+            Control field. The following flags can be specified.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SequenceId">
+            <summary>
+            The sequence number of the packet.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.NextReceive">
+            <summary>
+            The expected sequence number of the next packet received.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SackMask1">
+            <summary>
+            Optional low 32 bits of the SACK mask, in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_079478cb-f4c5-4ce5-b72b-2144da5d2ce7">little-endian</see> byte order. The existence of this field in the packet is dependent upon the <b>bControl</b> field having <b>PACKET_CONTROL_SACK1</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SackMask2">
+            <summary>
+            Optional high 32 bits of the SACK mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bControl</b> field having <b>PACKET_CONTROL_SACK2</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SendMask1">
+            <summary>
+            Optional low 32 bits of the send mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bControl</b> field having <b>PACKET_CONTROL_SEND1</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SendMask2">
+            <summary>
+            Optional high 32 bits of the send mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bControl</b> field having <b>PACKET_CONTROL_SEND2</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.Signature">
+            <summary>
+            If the connection was established by using signing, this MUST be the signature of the packet using the agreed-upon signing algorithm. The packet <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_b62c00dd-75c2-47bf-ab93-bd8681b8fee4">sequence ID</see> to be used in the calculation is the value in <b>bSeq</b>. This field MUST NOT be present if signing is not enabled for the connection.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.SessionId">
+            <summary>
+            The session identifier. When the packet is marked as <b>PACKET_CONTROL_KEEPALIVE_OR_CORRELATE</b> on connections reported as version 0x00010005 or higher, the <b>dwSessID</b> identifier MUST be set to the same <b>dwSessID</b> value specified in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219">CONNECT</see> message originally associated with the connection, and there MUST NOT be any application <b>payload</b> data for the packet. Otherwise, <b>dwSessID</b> MUST NOT be present.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.DataFrameMessage.Payload">
+            <summary>
+            Application payload data. The size of the <b>payload</b> field is the total <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_a70f5e84-6960-42f0-a160-ba0281eb548d">UDP</see> payload size minus the amount of data consumed by DFRAME headers up to this point. If the <b>PACKET_CONTROL_COALESCE</b> flag is set, the application <b>payload</b> data is not a single message or portion of a message; it is instead organized according to the coalesced payload format, as specified in section 2.2.3.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage">
+            <summary>
+            The HARD_DISCONNECT packet is used to quickly disconnect or <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_6aa258ea-917f-461a-9c54-1b1a66791965">acknowledge</see> quick disconnection without waiting for remaining packets to be delivered.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.Command">
+            <summary>
+            The command-code bitmask that contains values that are combined by using the bitwise OR operation from the following table. The <b>PACKET_COMMAND_CFRAME</b> flag MUST be set. The <b>PACKET_COMMAND_POLL</b> flag SHOULD NOT be set. All other bits MUST be set to zero and the packet MUST be ignored if they are not.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.Opcode">
+            <summary>
+            An extended operation code. It MUST be set to the following value:
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.MessageId" -->
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.ResponseId">
+            <summary>
+            The response identifier. This value SHOULD be set to zero, unless the connection is using <b>PACKET_SIGNING_FULL</b>; in which case, it MUST be set to the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_b62c00dd-75c2-47bf-ab93-bd8681b8fee4">sequence ID</see> of the next <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2d23f9e2-e672-4706-a346-5ca133d47473">data frame (DFRAME)</see> that would have been sent had HARD_DISCONNECT not occurred.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.ProtocolVersion">
+            <summary>
+            The version number, in <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_079478cb-f4c5-4ce5-b72b-2144da5d2ce7">little-endian</see> byte order, of the requestor's DirectPlay 8 Protocol. The value SHOULD match the value previously sent in a <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219">CONNECT</see>, <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/2377d224-85b7-4c1a-8677-bd18a08dc5da">CONNECTED</see>, or <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/ac197b6f-789f-4905-bae5-362ca920e177">CONNECTED_SIGNED</see> packet, and MUST be ignored on receipt.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.SessionId">
+            <summary>
+            The session identifier. This value MUST be set to the same <b>dwSessID</b> value that is specified in the CONNECT message originally associated with the connection.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.Timestamp">
+            <summary>
+            The sender's computer system <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2efd2022-ffd1-4be4-9ff3-aa6b1515948f">tick count</see>, in millisecond units, specified in little-endian byte order.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.HardDisconnectMessage.Signature">
+            <summary>
+            If the connection was established using signing, this MUST be the signature of the packet using the agreed-upon signing algorithm. The packet sequence ID to be used in the calculation is the value in <b>bRspId</b>. This field MUST NOT be present if signing is not enabled for the connection.
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.Data">
+            <summary>
+            frame contains user data
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.Reliable">
+            <summary>
+            frame is delivered reliably
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.Sequential">
+            <summary>
+            frame is indicated sequentially
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.Poll">
+            <summary>
+            <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_7b0ee975-d1b4-4a39-865d-d13e6c96aa76">partner</see> acknowledges immediately
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.NewMessage">
+            <summary>
+            DFRAME is first in message
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.EndMessage">
+            <summary>
+            DFRAME is last in message
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.User1">
+            <summary>
+            first consumer-controlled flag
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.User2">
+            <summary>
+            second consumer-controlled flag
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketCommand.CommandFrame">
+            <summary>
+            <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_0cca315e-b199-4f2f-a739-0e2e3582a00e">command frame (CFRAME)</see>
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Retry">
+            <summary>
+            indicates whether the frame is a retry for this sequence number
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.KeepAliveOrCorrelate">
+            <summary>
+            protocol version levels of 0x00010005 and higher indicate that the frame is a keep-alive frame; version levels of less than 0x00010005 indicate a request for a dedicated <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_6aa258ea-917f-461a-9c54-1b1a66791965">acknowledgment (ACK)</see> from the receiver
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Coalesce">
+            <summary>
+            protocol version levels of 0x00010005 and higher indicate that the packet contains multiple payloads as described in section <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/0ce3a800-f861-4556-9078-2004c2662ab3">2.2.3</see>
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.EndStream">
+            <summary>
+            last packet in the stream; indicates disconnect
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Sack1">
+            <summary>
+            low 32 bits of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/9ca3f71c-1040-40b0-9866-2e2e40cf65b0">SACK</see> mask are present
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Sack2">
+            <summary>
+            high 32 bits of the SACK mask are present
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Send1">
+            <summary>
+            low 32 bits of the cancel-<see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_7a220632-7944-4262-9740-388ba45c010b">send mask</see> are present
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.PacketControl.Send2">
+            <summary>
+            high 32 bits of the cancel-send mask are present
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.SackFlags.Response">
+            <summary>
+            <b>bRetry</b> field is valid
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.SackFlags.Sack1">
+            <summary>
+            low 32 bits of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_04967b3e-cdc6-4a45-a3d5-3e96a02770b9">SACK</see> mask are present in <b>dwSACKMask1</b>
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.SackFlags.Sack2">
+            <summary>
+            high 32 bits of the SACK mask are present in <b>dwSACKMask2</b>
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.SackFlags.Send1">
+            <summary>
+            low 32 bits of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_7a220632-7944-4262-9740-388ba45c010b">send mask</see> are present in <b>dwSendMask1</b>
+            </summary>
+        </member>
+        <member name="F:Aigamo.Otsuki.Messages.Reliable.SackFlags.Send2">
+            <summary>
+            high 32 bits of the send mask are present in <b>dwSendMask2</b>
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.Reliable.SackMessage">
+            <summary>
+            The SACK packet is used to selectively <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_6aa258ea-917f-461a-9c54-1b1a66791965">acknowledge</see> outstanding packets. Packet acknowledgment (ACK) is typically bundled in all user data packets using the <b>bSeq</b> and <b>bNRec</b> fields found in the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2d23f9e2-e672-4706-a346-5ca133d47473">data frame (DFRAME)</see> header. However, the SACK packet is used when a dedicated ACK is requested (that is, when the <b>PACKET_COMMAND_POLL</b> bit in the <b>bCommand</b> header field is set) or when no user data remains for further bundled ACKs.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Command">
+            <summary>
+            The command-code bitmask that contains bitwise OR values from the following table. The <b>PACKET_COMMAND_CFRAME</b> flag MUST be set. The <b>PACKET_COMMAND_POLL</b> flag SHOULD NOT be set and SHOULD be ignored on receipt. All other bits MUST be set to zero and the packet MUST be ignored if they are not.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Opcode">
+            <summary>
+            An extended operation code. It MUST be set to the following value:
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Flags">
+            <summary>
+            A status flag or flags. The value can be one or more of the following values. All other bits MUST be set to zero. The <b>SACK_FLAGS_RESPONSE</b> flag SHOULD be set and <b>bRetry</b> SHOULD be filled in properly.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Retry">
+            <summary>
+            Indicates whether the last received packet was a retry. This value MUST be ignored if <b>SACK_FLAGS_RESPONSE</b> is not set. The value SHOULD be set to zero if the last received DFRAME for the connection was not marked as a retry; otherwise, the value SHOULD be nonzero. Recipients MUST NOT require that any particular bit or bits be set in the nonzero case—only that at least one bit is set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.NextSend">
+            <summary>
+            This field represents the sequence number of the next DFRAME to send. SACK packets do not have sequence numbers of their own.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.NextReceive">
+            <summary>
+            The expected sequence number of the next packet received. If the <b>SACK_FLAGS_SACK_MASK1</b> or <b>SACK_FLAGS_SACK_MASK2</b> flag is set, the <b>bNRcv</b> field is supplemented with the corresponding additional <b>dwSACKMask1</b> or <b>dwSACKMask2</b> bitmask field that selectively acknowledges frames with sequence numbers higher than <b>bNRcv</b>.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Padding">
+            <summary>
+            This SHOULD be set to zero when sent and MUST be ignored on receipt.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Timestamp">
+            <summary>
+            The sender's computer system <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_2efd2022-ffd1-4be4-9ff3-aa6b1515948f">tick count</see>, in millisecond units, specified in little-endian byte order.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.SackMask1">
+            <summary>
+            The optional low 32 bits of the SACK mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bFlags</b> field having <b>SACK_FLAGS_SACK_MASK1</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.SackMask2">
+            <summary>
+            The optional high 32 bits of the SACK mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bFlags</b> field having <b>SACK_FLAGS_SACK_MASK2</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.SendMask1">
+            <summary>
+            The optional low 32 bits of the send mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bFlags</b> field having <b>SACK_FLAGS_SEND_MASK1</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.SendMask2">
+            <summary>
+            The optional high 32 bits of the send mask, in little-endian byte order. The existence of this field in the packet is dependent upon the <b>bFlags</b> field having <b>SACK_FLAGS_SEND_MASK2</b> set.
+            </summary>
+        </member>
+        <member name="P:Aigamo.Otsuki.Messages.Reliable.SackMessage.Signature">
+            <summary>
+            If the connection was established using signing, this MUST be the signature of the packet using the agreed-upon signing algorithm. The packet <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/a4ef7612-93d2-4d94-a96c-dbe6a1890ed6#gt_b62c00dd-75c2-47bf-ab93-bd8681b8fee4">sequence ID</see> to be used in the calculation is the value in <b>bNSeq</b>. This field MUST NOT be present if signing is not enabled for the connection.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.ThreadSafeAttribute">
+            <summary>
+            Represents an attribute that marks a class as thread-safe.
+            This is only for documentation purposes and does not
+            have any affect on the code's actual thread-safety.
+            </summary>
+        </member>
+        <member name="T:Aigamo.Otsuki.Messages.ThreadUnsafeAttribute">
+            <summary>
+            Represents an attribute that marks a class as not being thread-safe.
+            This is only for documentation purposes and does not
+            have any affect on the code's actual thread-safety.
+            </summary>
+        </member>
+    </members>
+</doc>

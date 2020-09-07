@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <Authors>ycanardeau</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ycanardeau/Otsuki</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ycanardeau/Otsuki</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DocumentationFile>Aigamo.Otsuki.Messages.xml</DocumentationFile>
+    <Description>DirectPlay 8 Reliable Protocol messages and DirectPlay 8 Core and Service Providers Protocol messages.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aigamo.Extensions.Primitives" Version="1.0.1" />
+  </ItemGroup>
+
+</Project>

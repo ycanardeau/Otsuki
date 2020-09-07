@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30404.54
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aigamo.Otsuki.Messages", "Aigamo.Otsuki.Messages\Aigamo.Otsuki.Messages.csproj", "{03260FC0-D5E1-447E-92B8-3C4AE460295C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aigamo.Otsuki.Messages.Tests", "Aigamo.Otsuki.Messages.Tests\Aigamo.Otsuki.Messages.Tests.csproj", "{59A68D36-02B3-408F-AC55-616FCD1E559A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03260FC0-D5E1-447E-92B8-3C4AE460295C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03260FC0-D5E1-447E-92B8-3C4AE460295C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03260FC0-D5E1-447E-92B8-3C4AE460295C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03260FC0-D5E1-447E-92B8-3C4AE460295C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A68D36-02B3-408F-AC55-616FCD1E559A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A68D36-02B3-408F-AC55-616FCD1E559A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A68D36-02B3-408F-AC55-616FCD1E559A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A68D36-02B3-408F-AC55-616FCD1E559A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30C03E63-52D8-40E5-98EC-3A29CE72EB61}
+	EndGlobalSection
+EndGlobal
