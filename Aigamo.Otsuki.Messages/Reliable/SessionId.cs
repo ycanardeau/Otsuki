@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Aigamo.Otsuki.Messages.Reliable
+﻿namespace Aigamo.Otsuki.Messages.Reliable
 {
 	public readonly struct SessionId : IEquatable<SessionId>, IFormattable
 	{

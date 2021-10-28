@@ -1,6 +1,4 @@
-﻿// Code from: https://larryparkerdotnet.wordpress.com/2009/08/25/documenting-thread-safety/
-
-using System;
+// Code from: https://larryparkerdotnet.wordpress.com/2009/08/25/documenting-thread-safety/
 
 namespace Aigamo.Otsuki.Messages
 {

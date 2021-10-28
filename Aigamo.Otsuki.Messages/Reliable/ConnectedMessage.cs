@@ -1,6 +1,5 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/2377d224-85b7-4c1a-8677-bd18a08dc5da
 
-using System.IO;
 using Aigamo.Extensions.Primitives;
 
 namespace Aigamo.Otsuki.Messages.Reliable

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Aigamo.Otsuki.Messages.Core
+﻿namespace Aigamo.Otsuki.Messages.Core
 {
 	public readonly struct Dpnid : IEquatable<Dpnid>, IFormattable
 	{

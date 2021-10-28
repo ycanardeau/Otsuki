@@ -1,8 +1,6 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/87370443-4103-4153-a8ac-a6728c39b7e5
 
-using System;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Text;
 using Flags = Aigamo.Otsuki.Messages.Core.NameTableEntryFlags;
 

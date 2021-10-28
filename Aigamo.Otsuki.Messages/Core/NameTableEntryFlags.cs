@@ -1,7 +1,5 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/87370443-4103-4153-a8ac-a6728c39b7e5
 
-using System;
-
 namespace Aigamo.Otsuki.Messages.Core
 {
 	[Flags]

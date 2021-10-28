@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Aigamo.Otsuki.Messages.Core
+﻿namespace Aigamo.Otsuki.Messages.Core
 {
 	public class CoreMessageSerializer : ICoreMessageSerializer<ICoreMessage>
 	{

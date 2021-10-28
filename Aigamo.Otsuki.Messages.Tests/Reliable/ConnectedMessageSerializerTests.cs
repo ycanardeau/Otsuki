@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Aigamo.Otsuki.Messages.Reliable;
+﻿using Aigamo.Otsuki.Messages.Reliable;
 using FluentAssertions;
 using Xunit;
 

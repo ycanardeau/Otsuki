@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Aigamo.Otsuki.Messages.Core;
+﻿using Aigamo.Otsuki.Messages.Core;
 using FluentAssertions;
 using Xunit;
 

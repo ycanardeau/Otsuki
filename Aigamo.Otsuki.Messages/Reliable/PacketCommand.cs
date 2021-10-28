@@ -1,7 +1,5 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/97f93510-ca87-4df6-9af1-af5d930e42fa
 
-using System;
-
 namespace Aigamo.Otsuki.Messages.Reliable
 {
 	[Flags]

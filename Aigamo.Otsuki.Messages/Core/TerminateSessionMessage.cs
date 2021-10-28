@@ -1,9 +1,6 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/f3ae8504-5358-4af8-b67d-330250c45832
 
-using System;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace Aigamo.Otsuki.Messages.Core

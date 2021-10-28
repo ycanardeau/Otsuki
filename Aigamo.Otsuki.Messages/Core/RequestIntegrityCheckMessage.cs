@@ -1,6 +1,5 @@
 ﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/91b0cfb1-9a46-476a-b3f0-e34a10554ce5
 
-using System.IO;
 using System.Text;
 
 namespace Aigamo.Otsuki.Messages.Core
