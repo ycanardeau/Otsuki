@@ -3,14 +3,14 @@ using Aigamo.Otsuki.Messages.Core;
 using FluentAssertions;
 using Xunit;
 
-namespace Aigamo.Otsuki.Messages.Tests.Core
+namespace Aigamo.Otsuki.Messages.Tests.Core;
+
+public class AckNameTableOperationsMessageSerializerTests
 {
-	public class AckNameTableOperationsMessageSerializerTests
+	private static IEnumerable<object?[]> TestData()
 	{
-		private static IEnumerable<object?[]> TestData()
+		yield return new object?[]
 		{
-			yield return new object?[]
-			{
 				new byte[]
 				{
 					0xCC, 0x00, 0x00, 0x00,
@@ -71,24 +71,23 @@ namespace Aigamo.Otsuki.Messages.Tests.Core
 						null,
 					}.ToImmutableArray(),
 				},
-			};
-		}
+		};
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Deserialize(byte[] data, AckNameTableOperationsMessage expected)
-		{
-			var message = AckNameTableOperationsMessageSerializer.Default.Deserialize(data);
-			message.PacketType.Should().Be(expected.PacketType);
-			message.NumEntries.Should().Be(expected.NumEntries);
-			message.EntriesInternal.SelectMany(e => e.ToByteArray()).ToArray().Should().Equal(expected.EntriesInternal.SelectMany(e => e.ToByteArray()).ToArray());
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Deserialize(byte[] data, AckNameTableOperationsMessage expected)
+	{
+		var message = AckNameTableOperationsMessageSerializer.Default.Deserialize(data);
+		message.PacketType.Should().Be(expected.PacketType);
+		message.NumEntries.Should().Be(expected.NumEntries);
+		message.EntriesInternal.SelectMany(e => e.ToByteArray()).ToArray().Should().Equal(expected.EntriesInternal.SelectMany(e => e.ToByteArray()).ToArray());
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Serialize(byte[] expected, AckNameTableOperationsMessage message)
-		{
-			AckNameTableOperationsMessageSerializer.Default.Serialize(message).Should().Equal(expected);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Serialize(byte[] expected, AckNameTableOperationsMessage message)
+	{
+		AckNameTableOperationsMessageSerializer.Default.Serialize(message).Should().Equal(expected);
 	}
 }

@@ -1,7 +1,6 @@
-﻿namespace Aigamo.Otsuki.Messages.Core
+﻿namespace Aigamo.Otsuki.Messages.Core;
+
+public interface ICoreMessage
 {
-	public interface ICoreMessage
-	{
-		PacketType PacketType { get; }
-	}
+	PacketType PacketType { get; }
 }

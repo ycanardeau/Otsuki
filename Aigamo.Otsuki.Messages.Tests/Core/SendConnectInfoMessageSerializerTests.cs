@@ -3,14 +3,14 @@ using Aigamo.Otsuki.Messages.Core;
 using FluentAssertions;
 using Xunit;
 
-namespace Aigamo.Otsuki.Messages.Tests.Core
+namespace Aigamo.Otsuki.Messages.Tests.Core;
+
+public class SendConnectInfoMessageSerializerTests
 {
-	public class SendConnectInfoMessageSerializerTests
+	private static IEnumerable<object?[]> TestData()
 	{
-		private static IEnumerable<object?[]> TestData()
+		yield return new object?[]
 		{
-			yield return new object?[]
-			{
 				new byte[]
 				{
 					0xC2, 0x00, 0x00, 0x00,
@@ -106,10 +106,10 @@ namespace Aigamo.Otsuki.Messages.Tests.Core
 					SessionName = "Test Session",
 					Reply = ImmutableArray<byte>.Empty,
 				},
-			};
+		};
 
-			yield return new object?[]
-			{
+		yield return new object?[]
+		{
 				new byte[]
 				{
 					0xC2, 0x00, 0x00, 0x00,
@@ -204,45 +204,44 @@ namespace Aigamo.Otsuki.Messages.Tests.Core
 					SessionName = string.Empty,
 					Reply = ImmutableArray<byte>.Empty,
 				},
-			};
-		}
+		};
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Deserialize(byte[] data, SendConnectInfoMessage expected)
-		{
-			var message = SendConnectInfoMessageSerializer.Default.Deserialize(data);
-			message.PacketType.Should().Be(expected.PacketType);
-			message.ReplySize.Should().Be(expected.ReplySize);
-			message.Size.Should().Be(expected.Size);
-			message.Flags.Should().Be(expected.Flags);
-			message.MaxPlayers.Should().Be(expected.MaxPlayers);
-			message.CurrentPlayers.Should().Be(expected.CurrentPlayers);
-			message.SessionNameSize.Should().Be(expected.SessionNameSize);
-			message.PasswordSize.Should().Be(expected.PasswordSize);
-			message.ReservedDataSize.Should().Be(expected.ReservedDataSize);
-			message.ApplicationReservedDataSize.Should().Be(expected.ApplicationReservedDataSize);
-			message.GuidInstance.Should().Be(expected.GuidInstance);
-			message.GuidApplication.Should().Be(expected.GuidApplication);
-			message.Dpnid.Should().Be(expected.Dpnid);
-			message.Version.Should().Be(expected.Version);
-			message.VersionNotUsed.Should().Be(expected.VersionNotUsed);
-			message.EntryCount.Should().Be(expected.EntryCount);
-			message.MembershipCount.Should().Be(expected.MembershipCount);
-			message.NameTableEntries.Should().Equal(expected.NameTableEntries);
-			message.NameTableMemberships.Should().Equal(expected.NameTableMemberships);
-			message.ApplicationReservedData.ToArray().Should().Equal(expected.ApplicationReservedData.ToArray());
-			message.ReservedData.ToArray().Should().Equal(expected.ReservedData.ToArray());
-			message.Password.Should().Be(expected.Password);
-			message.SessionName.Should().Be(expected.SessionName);
-			message.Reply.ToArray().Should().Equal(expected.Reply.ToArray());
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Deserialize(byte[] data, SendConnectInfoMessage expected)
+	{
+		var message = SendConnectInfoMessageSerializer.Default.Deserialize(data);
+		message.PacketType.Should().Be(expected.PacketType);
+		message.ReplySize.Should().Be(expected.ReplySize);
+		message.Size.Should().Be(expected.Size);
+		message.Flags.Should().Be(expected.Flags);
+		message.MaxPlayers.Should().Be(expected.MaxPlayers);
+		message.CurrentPlayers.Should().Be(expected.CurrentPlayers);
+		message.SessionNameSize.Should().Be(expected.SessionNameSize);
+		message.PasswordSize.Should().Be(expected.PasswordSize);
+		message.ReservedDataSize.Should().Be(expected.ReservedDataSize);
+		message.ApplicationReservedDataSize.Should().Be(expected.ApplicationReservedDataSize);
+		message.GuidInstance.Should().Be(expected.GuidInstance);
+		message.GuidApplication.Should().Be(expected.GuidApplication);
+		message.Dpnid.Should().Be(expected.Dpnid);
+		message.Version.Should().Be(expected.Version);
+		message.VersionNotUsed.Should().Be(expected.VersionNotUsed);
+		message.EntryCount.Should().Be(expected.EntryCount);
+		message.MembershipCount.Should().Be(expected.MembershipCount);
+		message.NameTableEntries.Should().Equal(expected.NameTableEntries);
+		message.NameTableMemberships.Should().Equal(expected.NameTableMemberships);
+		message.ApplicationReservedData.ToArray().Should().Equal(expected.ApplicationReservedData.ToArray());
+		message.ReservedData.ToArray().Should().Equal(expected.ReservedData.ToArray());
+		message.Password.Should().Be(expected.Password);
+		message.SessionName.Should().Be(expected.SessionName);
+		message.Reply.ToArray().Should().Equal(expected.Reply.ToArray());
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Serialize(byte[] expected, SendConnectInfoMessage message)
-		{
-			SendConnectInfoMessageSerializer.Default.Serialize(message).Should().Equal(expected);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Serialize(byte[] expected, SendConnectInfoMessage message)
+	{
+		SendConnectInfoMessageSerializer.Default.Serialize(message).Should().Equal(expected);
 	}
 }

@@ -4,14 +4,14 @@ using Aigamo.Otsuki.Messages.Reliable;
 using FluentAssertions;
 using Xunit;
 
-namespace Aigamo.Otsuki.Messages.Tests.Reliable
+namespace Aigamo.Otsuki.Messages.Tests.Reliable;
+
+public class DataFrameMessageSerializerTests
 {
-	public class DataFrameMessageSerializerTests
+	public static IEnumerable<object?[]> TestData()
 	{
-		public static IEnumerable<object?[]> TestData()
+		yield return new object?[]
 		{
-			yield return new object?[]
-			{
 				new byte[]
 				{
 					0x3F, 0x02, 0x00, 0x00, 0xC6, 0xAE, 0xC9, 0x79,
@@ -28,10 +28,10 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable
 					SessionId = new SessionId(0x79C9AEC6),
 				},
 				false,
-			};
+		};
 
-			yield return new object?[]
-			{
+		yield return new object?[]
+		{
 				new byte[]
 				{
 					0x3f, 0x02, 0x00, 0x00, 0x7d, 0x99, 0xc5, 0x51,
@@ -48,10 +48,10 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable
 					SessionId = new SessionId(0x51C5997D),
 				},
 				false
-			};
+		};
 
-			yield return new object?[]
-			{
+		yield return new object?[]
+		{
 				new byte[]
 				{
 					0x7F,
@@ -77,28 +77,27 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable
 					User1 = true,
 				},
 				false,
-			};
-		}
+		};
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Deserialize(byte[] data, DataFrameMessage expected, bool enableSigning)
-		{
-			var message = DataFrameMessageSerializer.Default.Deserialize(data);
-			message.Command.Should().Be(expected.Command);
-			message.Control.Should().Be(expected.Control);
-			message.SequenceId.Should().Be(expected.SequenceId);
-			message.NextReceive.Should().Be(expected.NextReceive);
-			message.SackMask.Should().Be(expected.SackMask);
-			message.SendMask.Should().Be(expected.SendMask);
-			message.Payload.ToArray().Should().Equal(expected.Payload.ToArray());
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Deserialize(byte[] data, DataFrameMessage expected, bool enableSigning)
+	{
+		var message = DataFrameMessageSerializer.Default.Deserialize(data);
+		message.Command.Should().Be(expected.Command);
+		message.Control.Should().Be(expected.Control);
+		message.SequenceId.Should().Be(expected.SequenceId);
+		message.NextReceive.Should().Be(expected.NextReceive);
+		message.SackMask.Should().Be(expected.SackMask);
+		message.SendMask.Should().Be(expected.SendMask);
+		message.Payload.ToArray().Should().Equal(expected.Payload.ToArray());
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Serialize(byte[] expected, DataFrameMessage message, bool enableSigning)
-		{
-			DataFrameMessageSerializer.Default.Serialize(message).Should().Equal(expected);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Serialize(byte[] expected, DataFrameMessage message, bool enableSigning)
+	{
+		DataFrameMessageSerializer.Default.Serialize(message).Should().Equal(expected);
 	}
 }

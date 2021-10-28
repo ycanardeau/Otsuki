@@ -4,14 +4,14 @@ using Aigamo.Otsuki.Messages.Core;
 using FluentAssertions;
 using Xunit;
 
-namespace Aigamo.Otsuki.Messages.Tests.Core
+namespace Aigamo.Otsuki.Messages.Tests.Core;
+
+public class PlayerConnectInfoMessageSerializerTests
 {
-	public class PlayerConnectInfoMessageSerializerTests
+	private static IEnumerable<object?[]> TestData()
 	{
-		private static IEnumerable<object?[]> TestData()
+		yield return new object?[]
 		{
-			yield return new object?[]
-			{
 				new byte[]
 				{
 					0xC1, 0x00, 0x00, 0x00,
@@ -50,10 +50,10 @@ namespace Aigamo.Otsuki.Messages.Tests.Core
 					Data = ImmutableArray<byte>.Empty,
 					Name = "Test User",
 				},
-			};
+		};
 
-			yield return new object?[]
-			{
+		yield return new object?[]
+		{
 				new byte[]
 				{
 					0xC1, 0x00, 0x00, 0x00,
@@ -98,38 +98,37 @@ namespace Aigamo.Otsuki.Messages.Tests.Core
 					Data = Encoding.Unicode.GetBytes("Hello World!").ToImmutableArray(),
 					Name = "TestPlayer",
 				},
-			};
-		}
+		};
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Deserialize(byte[] data, PlayerConnectInfoMessage expected)
-		{
-			var message = PlayerConnectInfoMessageSerializer.Default.Deserialize(data);
-			message.PacketType.Should().Be(expected.PacketType);
-			message.Flags.Should().Be(expected.Flags);
-			message.DnetVersion.Should().Be(expected.DnetVersion);
-			message.NameSize.Should().Be(expected.NameSize);
-			message.DataSize.Should().Be(expected.DataSize);
-			message.PasswordSize.Should().Be(expected.PasswordSize);
-			message.ConnectDataSize.Should().Be(expected.ConnectDataSize);
-			message.UrlSize.Should().Be(expected.UrlSize);
-			message.GuidInstance.Should().Be(expected.GuidInstance);
-			message.GuidApplication.Should().Be(expected.GuidApplication);
-			message.AlternateAddressDataSize.Should().Be(expected.AlternateAddressDataSize);
-			message.AlternateAddresses.SelectMany(a => a.ToByteArray()).ToArray().Should().Equal(expected.AlternateAddresses.SelectMany(a => a.ToByteArray()).ToArray());
-			message.Url.Should().Be(expected.Url);
-			message.ConnectData.ToArray().Should().Equal(expected.ConnectData.ToArray());
-			message.Password.Should().Be(expected.Password);
-			message.Data.ToArray().Should().Equal(expected.Data.ToArray());
-			message.Name.Should().Be(expected.Name);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Deserialize(byte[] data, PlayerConnectInfoMessage expected)
+	{
+		var message = PlayerConnectInfoMessageSerializer.Default.Deserialize(data);
+		message.PacketType.Should().Be(expected.PacketType);
+		message.Flags.Should().Be(expected.Flags);
+		message.DnetVersion.Should().Be(expected.DnetVersion);
+		message.NameSize.Should().Be(expected.NameSize);
+		message.DataSize.Should().Be(expected.DataSize);
+		message.PasswordSize.Should().Be(expected.PasswordSize);
+		message.ConnectDataSize.Should().Be(expected.ConnectDataSize);
+		message.UrlSize.Should().Be(expected.UrlSize);
+		message.GuidInstance.Should().Be(expected.GuidInstance);
+		message.GuidApplication.Should().Be(expected.GuidApplication);
+		message.AlternateAddressDataSize.Should().Be(expected.AlternateAddressDataSize);
+		message.AlternateAddresses.SelectMany(a => a.ToByteArray()).ToArray().Should().Equal(expected.AlternateAddresses.SelectMany(a => a.ToByteArray()).ToArray());
+		message.Url.Should().Be(expected.Url);
+		message.ConnectData.ToArray().Should().Equal(expected.ConnectData.ToArray());
+		message.Password.Should().Be(expected.Password);
+		message.Data.ToArray().Should().Equal(expected.Data.ToArray());
+		message.Name.Should().Be(expected.Name);
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Serialize(byte[] expected, PlayerConnectInfoMessage message)
-		{
-			PlayerConnectInfoMessageSerializer.Default.Serialize(message).Should().Equal(expected);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Serialize(byte[] expected, PlayerConnectInfoMessage message)
+	{
+		PlayerConnectInfoMessageSerializer.Default.Serialize(message).Should().Equal(expected);
 	}
 }

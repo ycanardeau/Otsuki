@@ -1,9 +1,8 @@
 ﻿using System.Net.Sockets;
 
-namespace Aigamo.Otsuki.Messages.Core
+namespace Aigamo.Otsuki.Messages.Core;
+
+internal interface IImmutableEndPoint
 {
-	internal interface IImmutableEndPoint
-	{
-		AddressFamily AddressFamily { get; }
-	}
+	AddressFamily AddressFamily { get; }
 }

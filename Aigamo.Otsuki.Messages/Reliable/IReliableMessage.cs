@@ -1,7 +1,6 @@
-﻿namespace Aigamo.Otsuki.Messages.Reliable
+﻿namespace Aigamo.Otsuki.Messages.Reliable;
+
+public interface IReliableMessage
 {
-	public interface IReliableMessage
-	{
-		PacketCommand Command { get; }
-	}
+	PacketCommand Command { get; }
 }

@@ -1,80 +1,79 @@
 ﻿using System.Collections.Immutable;
 using System.Text;
 
-namespace Aigamo.Otsuki.Messages.Core
+namespace Aigamo.Otsuki.Messages.Core;
+
+internal abstract class NullTerminatedString<T> : IEquatable<T> where T : NullTerminatedString<T>
 {
-	internal abstract class NullTerminatedString<T> : IEquatable<T> where T : NullTerminatedString<T>
+	private readonly IImmutableList<byte> _value;
+	private readonly Encoding _encoding;
+
+	protected NullTerminatedString(Encoding encoding) : this(Array.Empty<byte>(), encoding) { }
+
+	protected NullTerminatedString(byte[] value, Encoding encoding)
 	{
-		private readonly IImmutableList<byte> _value;
-		private readonly Encoding _encoding;
-
-		protected NullTerminatedString(Encoding encoding) : this(Array.Empty<byte>(), encoding) { }
-
-		protected NullTerminatedString(byte[] value, Encoding encoding)
-		{
-			_value = value.ToImmutableArray();
-			_encoding = encoding;
-		}
-
-		protected NullTerminatedString(string? value, Encoding encoding) : this(!string.IsNullOrEmpty(value) ? encoding.GetBytes(value + '\0') : Array.Empty<byte>(), encoding) { }
-
-		public int Length => _value.Count;
-
-		public byte[] ToByteArray() => _value.ToArray();
-
-		public override string ToString() => _encoding.GetString(ToByteArray()).TrimEnd('\0');
-
-		public bool Equals(T? other) => ToString().Equals(other?.ToString());
-
-		public override bool Equals(object? obj) => obj switch
-		{
-			T other => Equals(other),
-			string other => ToString().Equals(other),
-			_ => false,
-		};
-
-		public override int GetHashCode() => ToString().GetHashCode();
+		_value = value.ToImmutableArray();
+		_encoding = encoding;
 	}
 
-	internal sealed class NullTerminatedAsciiString : NullTerminatedString<NullTerminatedAsciiString>
+	protected NullTerminatedString(string? value, Encoding encoding) : this(!string.IsNullOrEmpty(value) ? encoding.GetBytes(value + '\0') : Array.Empty<byte>(), encoding) { }
+
+	public int Length => _value.Count;
+
+	public byte[] ToByteArray() => _value.ToArray();
+
+	public override string ToString() => _encoding.GetString(ToByteArray()).TrimEnd('\0');
+
+	public bool Equals(T? other) => ToString().Equals(other?.ToString());
+
+	public override bool Equals(object? obj) => obj switch
 	{
-		public static readonly NullTerminatedAsciiString Empty = new NullTerminatedAsciiString();
+		T other => Equals(other),
+		string other => ToString().Equals(other),
+		_ => false,
+	};
 
-		public NullTerminatedAsciiString() : base(Encoding.ASCII) { }
-		public NullTerminatedAsciiString(byte[] value) : base(value, Encoding.ASCII) { }
-		public NullTerminatedAsciiString(string? value) : base(value, Encoding.ASCII) { }
+	public override int GetHashCode() => ToString().GetHashCode();
+}
 
-		public static implicit operator NullTerminatedAsciiString(byte[] value) => new NullTerminatedAsciiString(value);
-		public static implicit operator NullTerminatedAsciiString(string? value) => new NullTerminatedAsciiString(value);
+internal sealed class NullTerminatedAsciiString : NullTerminatedString<NullTerminatedAsciiString>
+{
+	public static readonly NullTerminatedAsciiString Empty = new NullTerminatedAsciiString();
 
-		public static implicit operator string(NullTerminatedAsciiString value) => value.ToString();
+	public NullTerminatedAsciiString() : base(Encoding.ASCII) { }
+	public NullTerminatedAsciiString(byte[] value) : base(value, Encoding.ASCII) { }
+	public NullTerminatedAsciiString(string? value) : base(value, Encoding.ASCII) { }
 
-		public static bool operator ==(NullTerminatedAsciiString left, NullTerminatedAsciiString right) => left.Equals(right);
-		public static bool operator !=(NullTerminatedAsciiString left, NullTerminatedAsciiString right) => !left.Equals(right);
+	public static implicit operator NullTerminatedAsciiString(byte[] value) => new NullTerminatedAsciiString(value);
+	public static implicit operator NullTerminatedAsciiString(string? value) => new NullTerminatedAsciiString(value);
 
-		public override bool Equals(object? obj) => base.Equals(obj);
+	public static implicit operator string(NullTerminatedAsciiString value) => value.ToString();
 
-		public override int GetHashCode() => base.GetHashCode();
-	}
+	public static bool operator ==(NullTerminatedAsciiString left, NullTerminatedAsciiString right) => left.Equals(right);
+	public static bool operator !=(NullTerminatedAsciiString left, NullTerminatedAsciiString right) => !left.Equals(right);
 
-	internal sealed class NullTerminatedUnicodeString : NullTerminatedString<NullTerminatedUnicodeString>
-	{
-		public static readonly NullTerminatedUnicodeString Empty = new NullTerminatedUnicodeString();
+	public override bool Equals(object? obj) => base.Equals(obj);
 
-		public NullTerminatedUnicodeString() : base(Encoding.Unicode) { }
-		public NullTerminatedUnicodeString(byte[] value) : base(value, Encoding.Unicode) { }
-		public NullTerminatedUnicodeString(string? value) : base(value, Encoding.Unicode) { }
+	public override int GetHashCode() => base.GetHashCode();
+}
 
-		public static implicit operator NullTerminatedUnicodeString(byte[] value) => new NullTerminatedUnicodeString(value);
-		public static implicit operator NullTerminatedUnicodeString(string? value) => new NullTerminatedUnicodeString(value);
+internal sealed class NullTerminatedUnicodeString : NullTerminatedString<NullTerminatedUnicodeString>
+{
+	public static readonly NullTerminatedUnicodeString Empty = new NullTerminatedUnicodeString();
 
-		public static implicit operator string(NullTerminatedUnicodeString value) => value.ToString();
+	public NullTerminatedUnicodeString() : base(Encoding.Unicode) { }
+	public NullTerminatedUnicodeString(byte[] value) : base(value, Encoding.Unicode) { }
+	public NullTerminatedUnicodeString(string? value) : base(value, Encoding.Unicode) { }
 
-		public static bool operator ==(NullTerminatedUnicodeString left, NullTerminatedUnicodeString right) => left.Equals(right);
-		public static bool operator !=(NullTerminatedUnicodeString left, NullTerminatedUnicodeString right) => !left.Equals(right);
+	public static implicit operator NullTerminatedUnicodeString(byte[] value) => new NullTerminatedUnicodeString(value);
+	public static implicit operator NullTerminatedUnicodeString(string? value) => new NullTerminatedUnicodeString(value);
 
-		public override bool Equals(object? obj) => base.Equals(obj);
+	public static implicit operator string(NullTerminatedUnicodeString value) => value.ToString();
 
-		public override int GetHashCode() => base.GetHashCode();
-	}
+	public static bool operator ==(NullTerminatedUnicodeString left, NullTerminatedUnicodeString right) => left.Equals(right);
+	public static bool operator !=(NullTerminatedUnicodeString left, NullTerminatedUnicodeString right) => !left.Equals(right);
+
+	public override bool Equals(object? obj) => base.Equals(obj);
+
+	public override int GetHashCode() => base.GetHashCode();
 }

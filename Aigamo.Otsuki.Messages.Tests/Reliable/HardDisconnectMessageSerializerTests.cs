@@ -2,14 +2,14 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Aigamo.Otsuki.Messages.Tests.Reliable
+namespace Aigamo.Otsuki.Messages.Tests.Reliable;
+
+public class HardDisconnectMessageSerializerTests
 {
-	public class HardDisconnectMessageSerializerTests
+	public static IEnumerable<object?[]> TestData()
 	{
-		public static IEnumerable<object?[]> TestData()
+		yield return new object?[]
 		{
-			yield return new object?[]
-			{
 				new byte[]
 				{
 					0x80,
@@ -29,29 +29,28 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable
 					Timestamp = 0x0210B3D2,
 				},
 				false,
-			};
-		}
+		};
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Deserialize(byte[] data, HardDisconnectMessage expected, bool enableSigning)
-		{
-			var message = HardDisconnectMessageSerializer.Default.Deserialize(data);
-			message.Command.Should().Be(expected.Command);
-			message.Opcode.Should().Be(expected.Opcode);
-			message.MessageId.Should().Be(expected.MessageId);
-			message.ResponseId.Should().Be(expected.ResponseId);
-			message.ProtocolVersion.Should().Be(expected.ProtocolVersion);
-			message.SessionId.Should().Be(expected.SessionId);
-			message.Timestamp.Should().Be(expected.Timestamp);
-			message.Signature.Should().Be(expected.Signature);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Deserialize(byte[] data, HardDisconnectMessage expected, bool enableSigning)
+	{
+		var message = HardDisconnectMessageSerializer.Default.Deserialize(data);
+		message.Command.Should().Be(expected.Command);
+		message.Opcode.Should().Be(expected.Opcode);
+		message.MessageId.Should().Be(expected.MessageId);
+		message.ResponseId.Should().Be(expected.ResponseId);
+		message.ProtocolVersion.Should().Be(expected.ProtocolVersion);
+		message.SessionId.Should().Be(expected.SessionId);
+		message.Timestamp.Should().Be(expected.Timestamp);
+		message.Signature.Should().Be(expected.Signature);
+	}
 
-		[Theory]
-		[MemberData(nameof(TestData))]
-		internal void Serialize(byte[] expected, HardDisconnectMessage message, bool enableSigning)
-		{
-			HardDisconnectMessageSerializer.Default.Serialize(message).Should().Equal(expected);
-		}
+	[Theory]
+	[MemberData(nameof(TestData))]
+	internal void Serialize(byte[] expected, HardDisconnectMessage message, bool enableSigning)
+	{
+		HardDisconnectMessageSerializer.Default.Serialize(message).Should().Equal(expected);
 	}
 }

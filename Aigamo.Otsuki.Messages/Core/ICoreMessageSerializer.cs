@@ -1,9 +1,8 @@
-﻿namespace Aigamo.Otsuki.Messages.Core
-{
-	public interface ICoreMessageSerializer<TMessage> where TMessage : ICoreMessage
-	{
-		TMessage? Deserialize(byte[] data);
+﻿namespace Aigamo.Otsuki.Messages.Core;
 
-		byte[] Serialize(TMessage message);
-	}
+public interface ICoreMessageSerializer<TMessage> where TMessage : ICoreMessage
+{
+	TMessage? Deserialize(byte[] data);
+
+	byte[] Serialize(TMessage message);
 }

@@ -2,81 +2,80 @@
 
 using System.Text;
 
-namespace Aigamo.Otsuki.Messages.Core
+namespace Aigamo.Otsuki.Messages.Core;
+
+/// <summary>
+/// The DN_NAMETABLE_VERSION packet specifies the version number of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>.
+/// </summary>
+[Immutable]
+public sealed record NameTableVersionMessage : ICoreMessage
 {
 	/// <summary>
-	/// The DN_NAMETABLE_VERSION packet specifies the version number of the <see href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/8195991d-b7e3-4435-9e9f-2c3ab57eda8c#gt_d6292f62-e604-4ac7-9b20-87dde6efb93b">name table</see>.
+	/// A 32-bit field that contains the packet type.
 	/// </summary>
-	[Immutable]
-	public sealed record NameTableVersionMessage : ICoreMessage
+	public PacketType PacketType { get; } = PacketType.NameTableVersion;
+
+	/// <summary>
+	/// A 32-bit field that contains the current name table version number.
+	/// </summary>
+	public int Version { get; init; }
+
+	/// <summary>
+	/// Not used.
+	/// </summary>
+	internal int VersionNotUsed { get; init; }
+
+	public NameTableVersionMessage() { }
+
+	public override string ToString()
 	{
-		/// <summary>
-		/// A 32-bit field that contains the packet type.
-		/// </summary>
-		public PacketType PacketType { get; } = PacketType.NameTableVersion;
+		var builder = new StringBuilder();
+		builder.AppendLine($"{nameof(NameTableVersionMessage)}:");
+		builder.AppendLine($"\t{nameof(Version)}: {Version}");
+		builder.AppendLine($"\t{nameof(VersionNotUsed)}: {VersionNotUsed}");
+		return builder.ToString();
+	}
+}
 
-		/// <summary>
-		/// A 32-bit field that contains the current name table version number.
-		/// </summary>
-		public int Version { get; init; }
+internal class NameTableVersionMessageSerializer : ICoreMessageSerializer<NameTableVersionMessage>
+{
+	public static NameTableVersionMessageSerializer Default { get; } = new();
 
-		/// <summary>
-		/// Not used.
-		/// </summary>
-		internal int VersionNotUsed { get; init; }
+	public virtual NameTableVersionMessage? Read(BinaryReader reader)
+	{
+		var packetType = (PacketType)reader.ReadInt32();
+		if (packetType != PacketType.NameTableVersion)
+			return null;
 
-		public NameTableVersionMessage() { }
+		var version = reader.ReadInt32();
+		var versionNotUsed = reader.ReadInt32();
 
-		public override string ToString()
+		return new()
 		{
-			var builder = new StringBuilder();
-			builder.AppendLine($"{nameof(NameTableVersionMessage)}:");
-			builder.AppendLine($"\t{nameof(Version)}: {Version}");
-			builder.AppendLine($"\t{nameof(VersionNotUsed)}: {VersionNotUsed}");
-			return builder.ToString();
-		}
+			Version = version,
+			VersionNotUsed = versionNotUsed,
+		};
 	}
 
-	internal class NameTableVersionMessageSerializer : ICoreMessageSerializer<NameTableVersionMessage>
+	public virtual void Write(BinaryWriter writer, NameTableVersionMessage message)
 	{
-		public static NameTableVersionMessageSerializer Default { get; } = new();
+		writer.Write((int)message.PacketType);
+		writer.Write(message.Version);
+		writer.Write(message.VersionNotUsed);
+	}
 
-		public virtual NameTableVersionMessage? Read(BinaryReader reader)
-		{
-			var packetType = (PacketType)reader.ReadInt32();
-			if (packetType != PacketType.NameTableVersion)
-				return null;
+	public virtual NameTableVersionMessage? Deserialize(byte[] data)
+	{
+		using var stream = new MemoryStream(data);
+		using var reader = new BinaryReader(stream);
+		return Read(reader);
+	}
 
-			var version = reader.ReadInt32();
-			var versionNotUsed = reader.ReadInt32();
-
-			return new()
-			{
-				Version = version,
-				VersionNotUsed = versionNotUsed,
-			};
-		}
-
-		public virtual void Write(BinaryWriter writer, NameTableVersionMessage message)
-		{
-			writer.Write((int)message.PacketType);
-			writer.Write(message.Version);
-			writer.Write(message.VersionNotUsed);
-		}
-
-		public virtual NameTableVersionMessage? Deserialize(byte[] data)
-		{
-			using var stream = new MemoryStream(data);
-			using var reader = new BinaryReader(stream);
-			return Read(reader);
-		}
-
-		public virtual byte[] Serialize(NameTableVersionMessage message)
-		{
-			using var stream = new MemoryStream();
-			using var writer = new BinaryWriter(stream);
-			Write(writer, message);
-			return stream.ToArray();
-		}
+	public virtual byte[] Serialize(NameTableVersionMessage message)
+	{
+		using var stream = new MemoryStream();
+		using var writer = new BinaryWriter(stream);
+		Write(writer, message);
+		return stream.ToArray();
 	}
 }

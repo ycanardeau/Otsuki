@@ -1,9 +1,8 @@
-﻿namespace Aigamo.Otsuki.Messages.Reliable
-{
-	public interface IReliableMessageSerializer<TMessage> where TMessage : IReliableMessage
-	{
-		TMessage? Deserialize(byte[] data);
+﻿namespace Aigamo.Otsuki.Messages.Reliable;
 
-		byte[] Serialize(TMessage message);
-	}
+public interface IReliableMessageSerializer<TMessage> where TMessage : IReliableMessage
+{
+	TMessage? Deserialize(byte[] data);
+
+	byte[] Serialize(TMessage message);
 }

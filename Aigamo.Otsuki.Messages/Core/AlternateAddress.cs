@@ -4,83 +4,82 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Aigamo.Otsuki.Messages.Core
+namespace Aigamo.Otsuki.Messages.Core;
+
+[Immutable]
+internal sealed record AlternateAddress
 {
-	[Immutable]
-	internal sealed record AlternateAddress
+	internal byte Size => (byte)(3 + Address.AddressBytes.Count);
+
+	public AddressFamily Family => Address.AddressFamily;
+
+	public int Port { get; init; }
+
+	public ImmutableIPAddress Address { get; init; } = ImmutableIPAddress.Any;
+
+	public AlternateAddress() { }
+
+	public AlternateAddress(ImmutableIPAddress address, int port)
 	{
-		internal byte Size => (byte)(3 + Address.AddressBytes.Count);
+		Address = address;
+		Port = port;
+	}
 
-		public AddressFamily Family => Address.AddressFamily;
+	public AlternateAddress(ImmutableIPEndPoint endPoint) : this(endPoint.Address, endPoint.Port) { }
 
-		public int Port { get; init; }
-
-		public ImmutableIPAddress Address { get; init; } = ImmutableIPAddress.Any;
-
-		public AlternateAddress() { }
-
-		public AlternateAddress(ImmutableIPAddress address, int port)
+	private AlternateAddress(BinaryReader reader)
+	{
+		var size = reader.ReadByte();
+		var family = (AddressFamily)reader.ReadByte();
+		Port = (ushort)IPAddress.NetworkToHostOrder(reader.ReadInt16());
+		AddressBytes = family switch
 		{
-			Address = address;
-			Port = port;
-		}
+			AddressFamily.InterNetwork => reader.ReadBytes(4).ToImmutableArray(),
+			AddressFamily.InterNetworkV6 => reader.ReadBytes(16).ToImmutableArray(),
+			_ => throw new InvalidEnumArgumentException()
+		};
 
-		public AlternateAddress(ImmutableIPEndPoint endPoint) : this(endPoint.Address, endPoint.Port) { }
+		if (size != Size)
+			throw new ArgumentException();
+	}
 
-		private AlternateAddress(BinaryReader reader)
-		{
-			var size = reader.ReadByte();
-			var family = (AddressFamily)reader.ReadByte();
-			Port = (ushort)IPAddress.NetworkToHostOrder(reader.ReadInt16());
-			AddressBytes = family switch
-			{
-				AddressFamily.InterNetwork => reader.ReadBytes(4).ToImmutableArray(),
-				AddressFamily.InterNetworkV6 => reader.ReadBytes(16).ToImmutableArray(),
-				_ => throw new InvalidEnumArgumentException()
-			};
+	private IImmutableList<byte> AddressBytes
+	{
+		get => Address.AddressBytes;
+		init => Address = new IPAddress(value.ToArray()).ToImmutableIPAddress();
+	}
 
-			if (size != Size)
-				throw new ArgumentException();
-		}
+	public IImmutableEndPoint EndPoint => new IPEndPoint(Address.ToIPAddress(), Port).ToImmutableIPEndPoint();
 
-		private IImmutableList<byte> AddressBytes
-		{
-			get => Address.AddressBytes;
-			init => Address = new IPAddress(value.ToArray()).ToImmutableIPAddress();
-		}
+	public static AlternateAddress FromBinaryReader(BinaryReader reader) => new AlternateAddress(reader);
 
-		public IImmutableEndPoint EndPoint => new IPEndPoint(Address.ToIPAddress(), Port).ToImmutableIPEndPoint();
+	public static AlternateAddress FromByteArray(byte[] buffer)
+	{
+		using var stream = new MemoryStream(buffer);
+		using var reader = new BinaryReader(stream);
+		return new AlternateAddress(reader);
+	}
 
-		public static AlternateAddress FromBinaryReader(BinaryReader reader) => new AlternateAddress(reader);
+	public byte[] ToByteArray()
+	{
+		var stream = new MemoryStream();
+		var writer = new BinaryWriter(stream);
 
-		public static AlternateAddress FromByteArray(byte[] buffer)
-		{
-			using var stream = new MemoryStream(buffer);
-			using var reader = new BinaryReader(stream);
-			return new AlternateAddress(reader);
-		}
+		writer.Write(Size);
+		writer.Write((byte)Family);
+		writer.Write(IPAddress.HostToNetworkOrder((short)Port));
+		writer.Write(AddressBytes.ToArray());
 
-		public byte[] ToByteArray()
-		{
-			var stream = new MemoryStream();
-			var writer = new BinaryWriter(stream);
+		return stream.ToArray();
+	}
 
-			writer.Write(Size);
-			writer.Write((byte)Family);
-			writer.Write(IPAddress.HostToNetworkOrder((short)Port));
-			writer.Write(AddressBytes.ToArray());
-
-			return stream.ToArray();
-		}
-
-		public override string ToString()
-		{
-			var builder = new StringBuilder();
-			builder.AppendLine($"{nameof(AlternateAddress)}:");
-			builder.AppendLine($"\t{nameof(Family)}: {Family}");
-			builder.AppendLine($"\t{nameof(Port)}: {Port}");
-			builder.AppendLine($"\t{nameof(Address)}: {Address}");
-			return builder.ToString();
-		}
+	public override string ToString()
+	{
+		var builder = new StringBuilder();
+		builder.AppendLine($"{nameof(AlternateAddress)}:");
+		builder.AppendLine($"\t{nameof(Family)}: {Family}");
+		builder.AppendLine($"\t{nameof(Port)}: {Port}");
+		builder.AppendLine($"\t{nameof(Address)}: {Address}");
+		return builder.ToString();
 	}
 }
