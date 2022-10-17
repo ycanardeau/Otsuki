@@ -10,13 +10,13 @@ namespace Aigamo.Otsuki.Messages.Core;
 /// </summary>
 internal class Address
 {
-	public static readonly Guid ServiceProviderTcpIp = new Guid("ebfe7ba0-628d-11d2-ae0f-006097b01411");
+	public static readonly Guid ServiceProviderTcpIp = new("ebfe7ba0-628d-11d2-ae0f-006097b01411");
 
 	public static string KeyHostname = "hostname";
 	public static string KeyPort = "port";
 	public static string KeyProvider = "provider";
 
-	private readonly Dictionary<string, object> _components = new Dictionary<string, object>();
+	private readonly Dictionary<string, object> _components = new();
 
 	public Address() { }
 

@@ -6,7 +6,7 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable;
 
 public class SessionIdTests
 {
-	private static readonly SessionId _testSessionId = new SessionId(0x22AE0764);
+	private static readonly SessionId _testSessionId = new(0x22AE0764);
 
 	[Fact]
 	public void Empty()

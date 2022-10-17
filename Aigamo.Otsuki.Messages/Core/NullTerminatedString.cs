@@ -38,14 +38,14 @@ internal abstract class NullTerminatedString<T> : IEquatable<T> where T : NullTe
 
 internal sealed class NullTerminatedAsciiString : NullTerminatedString<NullTerminatedAsciiString>
 {
-	public static readonly NullTerminatedAsciiString Empty = new NullTerminatedAsciiString();
+	public static readonly NullTerminatedAsciiString Empty = new();
 
 	public NullTerminatedAsciiString() : base(Encoding.ASCII) { }
 	public NullTerminatedAsciiString(byte[] value) : base(value, Encoding.ASCII) { }
 	public NullTerminatedAsciiString(string? value) : base(value, Encoding.ASCII) { }
 
-	public static implicit operator NullTerminatedAsciiString(byte[] value) => new NullTerminatedAsciiString(value);
-	public static implicit operator NullTerminatedAsciiString(string? value) => new NullTerminatedAsciiString(value);
+	public static implicit operator NullTerminatedAsciiString(byte[] value) => new(value);
+	public static implicit operator NullTerminatedAsciiString(string? value) => new(value);
 
 	public static implicit operator string(NullTerminatedAsciiString value) => value.ToString();
 
@@ -59,14 +59,14 @@ internal sealed class NullTerminatedAsciiString : NullTerminatedString<NullTermi
 
 internal sealed class NullTerminatedUnicodeString : NullTerminatedString<NullTerminatedUnicodeString>
 {
-	public static readonly NullTerminatedUnicodeString Empty = new NullTerminatedUnicodeString();
+	public static readonly NullTerminatedUnicodeString Empty = new();
 
 	public NullTerminatedUnicodeString() : base(Encoding.Unicode) { }
 	public NullTerminatedUnicodeString(byte[] value) : base(value, Encoding.Unicode) { }
 	public NullTerminatedUnicodeString(string? value) : base(value, Encoding.Unicode) { }
 
-	public static implicit operator NullTerminatedUnicodeString(byte[] value) => new NullTerminatedUnicodeString(value);
-	public static implicit operator NullTerminatedUnicodeString(string? value) => new NullTerminatedUnicodeString(value);
+	public static implicit operator NullTerminatedUnicodeString(byte[] value) => new(value);
+	public static implicit operator NullTerminatedUnicodeString(string? value) => new(value);
 
 	public static implicit operator string(NullTerminatedUnicodeString value) => value.ToString();
 

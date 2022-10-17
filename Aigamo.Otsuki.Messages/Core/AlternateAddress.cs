@@ -51,7 +51,7 @@ internal sealed record AlternateAddress
 
 	public IImmutableEndPoint EndPoint => new IPEndPoint(Address.ToIPAddress(), Port).ToImmutableIPEndPoint();
 
-	public static AlternateAddress FromBinaryReader(BinaryReader reader) => new AlternateAddress(reader);
+	public static AlternateAddress FromBinaryReader(BinaryReader reader) => new(reader);
 
 	public static AlternateAddress FromByteArray(byte[] buffer)
 	{

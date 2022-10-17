@@ -6,7 +6,7 @@ namespace Aigamo.Otsuki.Messages.Tests.Reliable;
 
 public class SequenceIdTests
 {
-	private static readonly SequenceId _testSequenceId = new SequenceId(255);
+	private static readonly SequenceId _testSequenceId = new(255);
 
 	[Fact]
 	public void Empty()

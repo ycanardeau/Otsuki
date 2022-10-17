@@ -6,8 +6,8 @@ namespace Aigamo.Otsuki.Messages.Tests.Core;
 
 public class DpnidTests
 {
-	private static readonly Guid _testGuid = new Guid("eb4de2c4-79b2-484a-a1a8-7aa75f5545d4");
-	private static readonly Dpnid _testDpnid = new Dpnid(index: 2, version: 2, _testGuid);
+	private static readonly Guid _testGuid = new("eb4de2c4-79b2-484a-a1a8-7aa75f5545d4");
+	private static readonly Dpnid _testDpnid = new(index: 2, version: 2, _testGuid);
 
 	[Fact]
 	public void Empty()
