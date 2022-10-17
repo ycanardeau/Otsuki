@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/previous-versions/ms833500(v=msdn.10)?redirectedfrom=MSDN
+// Comments from: https://docs.microsoft.com/en-us/previous-versions/ms833500(v=msdn.10)?redirectedfrom=MSDN
 
 using System.Net;
 using System.Web;

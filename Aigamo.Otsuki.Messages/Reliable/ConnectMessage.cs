@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219
+// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8r/b3c67ec1-f73c-4c47-bd06-95cd4a3b4219
 
 using Aigamo.Extensions.Primitives;
 

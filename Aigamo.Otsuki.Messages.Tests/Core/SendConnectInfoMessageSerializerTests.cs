@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using Aigamo.Otsuki.Messages.Core;
 using FluentAssertions;
 using Xunit;

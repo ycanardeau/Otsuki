@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/d2f5c735-5947-4b76-98c0-d447d9d36de8
+// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/d2f5c735-5947-4b76-98c0-d447d9d36de8
 
 namespace Aigamo.Otsuki.Messages.Core;
 

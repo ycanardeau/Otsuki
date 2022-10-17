@@ -1,4 +1,4 @@
-﻿namespace Aigamo.Otsuki.Messages.Core;
+namespace Aigamo.Otsuki.Messages.Core;
 
 public interface ICoreMessage
 {

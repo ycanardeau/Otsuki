@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb320099(v=vs.85)
+// Comments from: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb320099(v=vs.85)
 
 namespace Aigamo.Otsuki.Messages.Core;
 

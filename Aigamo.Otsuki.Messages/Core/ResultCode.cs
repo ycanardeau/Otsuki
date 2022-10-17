@@ -1,4 +1,4 @@
-﻿// Code from: https://source.winehq.org/git/wine.git/blob/HEAD:/include/dplay8.h
+// Code from: https://source.winehq.org/git/wine.git/blob/HEAD:/include/dplay8.h
 // Comments from: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb320091(v=vs.85)
 // Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/7fc9f0e0-27d4-4975-b520-079737d5cb0b
 

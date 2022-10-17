@@ -1,4 +1,4 @@
-﻿namespace Aigamo.Otsuki.Messages.Reliable;
+namespace Aigamo.Otsuki.Messages.Reliable;
 
 public readonly record struct SequenceId(byte Value) : IEquatable<SequenceId>, IComparable<SequenceId>, IFormattable
 {

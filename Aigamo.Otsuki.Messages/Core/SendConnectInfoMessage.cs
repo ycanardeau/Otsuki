@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/075e84f0-b26c-4f10-9f69-21a0813dfc54
+// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/075e84f0-b26c-4f10-9f69-21a0813dfc54
 
 using System.Collections.Immutable;
 using System.Text;

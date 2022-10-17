@@ -1,4 +1,4 @@
-﻿// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/6b9cdb3e-09b4-49ba-a7c7-31a4c9a8a02f
+// Comments from: https://docs.microsoft.com/en-us/openspecs/windows_protocols/mc-dpl8cs/6b9cdb3e-09b4-49ba-a7c7-31a4c9a8a02f
 
 using System.Text;
 

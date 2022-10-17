@@ -1,4 +1,4 @@
-﻿namespace Aigamo.Otsuki.Messages.Reliable;
+namespace Aigamo.Otsuki.Messages.Reliable;
 
 public enum ExtendedOpcode : byte
 {
