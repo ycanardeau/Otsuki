@@ -13,6 +13,7 @@
     <NoWarn>1701;1702;1591</NoWarn>
     <DocumentationFile>Aigamo.Otsuki.Messages.xml</DocumentationFile>
     <Description>DirectPlay 8 Reliable Protocol messages and DirectPlay 8 Core and Service Providers Protocol messages.</Description>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
