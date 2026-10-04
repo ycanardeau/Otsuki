@@ -65,13 +65,13 @@ public sealed record HardDisconnectMessage : IReliableMessage
 
 	public ushort MajorVersion
 	{
-		get => ProtocolVersion.HighUInt16();
+		get => ProtocolVersion.HighUInt16;
 		init => ProtocolVersion = ProtocolVersion.WithHighUInt16(value);
 	}
 
 	public ushort MinorVersion
 	{
-		get => ProtocolVersion.LowUInt16();
+		get => ProtocolVersion.LowUInt16;
 		init => ProtocolVersion = ProtocolVersion.WithLowUInt16(value);
 	}
 

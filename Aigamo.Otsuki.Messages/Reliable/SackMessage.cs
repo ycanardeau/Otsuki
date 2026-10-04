@@ -158,13 +158,13 @@ public sealed record SackMessage : IReliableMessage
 	public ulong SackMask
 	{
 		get => (SackMask1, SackMask2).ToUInt64();
-		init => (SackMask1, SackMask2) = (value.LowUInt32(), value.HighUInt32());
+		init => (SackMask1, SackMask2) = (value.LowUInt32, value.HighUInt32);
 	}
 
 	public ulong SendMask
 	{
 		get => (SendMask1, SendMask2).ToUInt64();
-		init => (SendMask1, SendMask2) = (value.LowUInt32(), value.HighUInt32());
+		init => (SendMask1, SendMask2) = (value.LowUInt32, value.HighUInt32);
 	}
 
 	public override string ToString() => $"{nameof(SackMessage)} [" +
