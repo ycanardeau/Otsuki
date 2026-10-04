@@ -31,7 +31,7 @@ internal readonly struct ImmutableIPAddress : IEquatable<ImmutableIPAddress>
 	public bool Equals(ImmutableIPAddress other) => _value == other._value;
 	public override bool Equals(object? obj) => obj is ImmutableIPAddress other && Equals(other);
 
-	public override int GetHashCode() => HashCode.Combine(_value);
+	public override int GetHashCode() => _value?.GetHashCode() ?? 0;
 
 	public override string ToString() => _value!;
 

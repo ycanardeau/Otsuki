@@ -70,7 +70,7 @@ internal class Address
 				_ => throw new ArgumentException(),
 			};
 
-			return $"x-directplay:/{string.Join(';', _components.OrderByDescending(c => c.Key == KeyProvider).Select(c => $"{c.Key}={ComponentToString(c.Value)}").ToArray())}";
+			return $"x-directplay:/{string.Join(";", _components.OrderByDescending(c => c.Key == KeyProvider).Select(c => $"{c.Key}={ComponentToString(c.Value)}").ToArray())}";
 		}
 		set
 		{

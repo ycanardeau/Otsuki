@@ -91,7 +91,7 @@ public sealed record AckNameTableOperationsMessage : ICoreMessage
 		builder.AppendLine($"\t{nameof(NumEntries)}: {NumEntries}");
 
 		foreach (var e in Entries)
-			builder.AppendLine(string.Join('\n', (e?.ToString() ?? string.Empty).Split('\n').Select(l => "\t" + l)));
+			builder.AppendLine(string.Join("\n", (e?.ToString() ?? string.Empty).Split('\n').Select(l => "\t" + l)));
 
 		return builder.ToString();
 	}

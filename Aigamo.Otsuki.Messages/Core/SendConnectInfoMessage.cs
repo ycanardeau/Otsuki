@@ -159,10 +159,10 @@ public sealed record SendConnectInfoMessage : ICoreMessage
 		builder.AppendLine($"\t{nameof(VersionNotUsed)}: {VersionNotUsed}");
 
 		foreach (var e in NameTableEntries)
-			builder.AppendLine(string.Join('\n', e.ToString().Split('\n').Select(l => "\t" + l)));
+			builder.AppendLine(string.Join("\n", e.ToString().Split('\n').Select(l => "\t" + l)));
 
 		foreach (var m in NameTableMemberships)
-			builder.AppendLine(string.Join('\n', m.ToString().Split('\n').Select(l => "\t" + l)));
+			builder.AppendLine(string.Join("\n", m.ToString().Split('\n').Select(l => "\t" + l)));
 
 		builder.AppendLine($"\t{nameof(ApplicationReservedData)}: {BitConverter.ToString(ApplicationReservedData.ToArray())}");
 		builder.AppendLine($"\t{nameof(ReservedData)}: {BitConverter.ToString(ReservedData.ToArray())}");
