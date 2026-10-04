@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="Aigamo.Otsuki.Messages.Tests/Aigamo.Otsuki.Messages.Tests.csproj" />
+  <Project Path="Aigamo.Otsuki.Messages/Aigamo.Otsuki.Messages.csproj" />
+</Solution>
